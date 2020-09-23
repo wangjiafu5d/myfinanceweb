@@ -1,41 +1,14 @@
 package com.chuan.myfinanceweb.utils;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Properties;
-import java.util.Set;
 
-import org.jsoup.Connection;
-import org.jsoup.Connection.Method;
-import org.jsoup.Connection.Response;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.openqa.selenium.JavascriptException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxDriverService;
-import org.openqa.selenium.firefox.FirefoxOptions;
-import org.springframework.jca.cci.core.InteractionCallback;
-
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.util.Cookie;
 
 public class GetHtml {
 	
@@ -94,7 +67,7 @@ public static void main(String[] args) throws Exception {
 	      currentGroup.enumerate(lstThreads);
 	      for (int i = 0; i < noThreads; i++) {
 	      System.out.println("线程号：" + i + " = " + lstThreads[i].getName());
-	      lstThreads[noThreads-1].sleep(1000);
+//	      lstThreads[noThreads-1].sleep(1000);
 	      lstThreads[noThreads-1].interrupt();
 	      }
 //		Thread.currentThread().interrupt();

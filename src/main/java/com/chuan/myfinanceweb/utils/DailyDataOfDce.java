@@ -59,9 +59,9 @@ public class DailyDataOfDce {
 					tds.get(i).html("0");
 				}
 			}
-			if (tds.size()>0&&GetGoodsIdAndName.Instance.dceId.get(tds.get(0).html().replaceAll("&nbsp;", ""))!=null) {
+			if (tds.size()>0&&GetGoodsIdAndName.dceId.get(tds.get(0).html().replaceAll("&nbsp;", ""))!=null) {
 				String productname = tds.get(0).html().replaceAll("&nbsp;", "");
-				String productid = GetGoodsIdAndName.Instance.dceId.getProperty(productname);
+				String productid = GetGoodsIdAndName.dceId.getProperty(productname);
 				dailyData.setProductid(productid);
 				dailyData.setProductname(productname);
 				dailyData.setDelivermonth(tds.get(1).html());

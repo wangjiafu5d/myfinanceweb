@@ -133,8 +133,7 @@ public class DataOf100ppi {
     public void setDate(Date date) {
         this.date = date;
     }
-
-	public DataOf100ppi(Integer id, String productid, String productname, BigDecimal currentprice, String delivermonth1,
+    public DataOf100ppi(Integer id, String productid, String productname, BigDecimal currentprice, String delivermonth1,
 			BigDecimal settlementprice1, BigDecimal jc1, BigDecimal percent1, String delivermonth2,
 			BigDecimal settlementprice2, BigDecimal jc2, BigDecimal percent2, Date date) {
 		super();

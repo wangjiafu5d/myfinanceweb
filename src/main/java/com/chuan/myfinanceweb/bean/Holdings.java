@@ -5,23 +5,29 @@ import java.util.Date;
 public class Holdings {
     private Integer id;
 
-    private Byte rank;
+    private String productid;
 
-    private String companyname;
+    private String delivermonth;
+
+    private Integer rank;
+
+    private String volumcomp;
 
     private Integer cj;
 
     private Integer cjchg;
 
+    private String bcomp;
+
     private Integer buy;
 
     private Integer buychg;
 
+    private String scomp;
+
     private Integer sell;
 
     private Integer sellchg;
-
-    private String type;
 
     private Date date;
 
@@ -33,20 +39,36 @@ public class Holdings {
         this.id = id;
     }
 
-    public Byte getRank() {
+    public String getProductid() {
+        return productid;
+    }
+
+    public void setProductid(String productid) {
+        this.productid = productid == null ? null : productid.trim();
+    }
+
+    public String getDelivermonth() {
+        return delivermonth;
+    }
+
+    public void setDelivermonth(String delivermonth) {
+        this.delivermonth = delivermonth == null ? null : delivermonth.trim();
+    }
+
+    public Integer getRank() {
         return rank;
     }
 
-    public void setRank(Byte rank) {
+    public void setRank(Integer rank) {
         this.rank = rank;
     }
 
-    public String getCompanyname() {
-        return companyname;
+    public String getVolumcomp() {
+        return volumcomp;
     }
 
-    public void setCompanyname(String companyname) {
-        this.companyname = companyname == null ? null : companyname.trim();
+    public void setVolumcomp(String volumcomp) {
+        this.volumcomp = volumcomp == null ? null : volumcomp.trim();
     }
 
     public Integer getCj() {
@@ -65,6 +87,14 @@ public class Holdings {
         this.cjchg = cjchg;
     }
 
+    public String getBcomp() {
+        return bcomp;
+    }
+
+    public void setBcomp(String bcomp) {
+        this.bcomp = bcomp == null ? null : bcomp.trim();
+    }
+
     public Integer getBuy() {
         return buy;
     }
@@ -79,6 +109,14 @@ public class Holdings {
 
     public void setBuychg(Integer buychg) {
         this.buychg = buychg;
+    }
+
+    public String getScomp() {
+        return scomp;
+    }
+
+    public void setScomp(String scomp) {
+        this.scomp = scomp == null ? null : scomp.trim();
     }
 
     public Integer getSell() {
@@ -97,14 +135,6 @@ public class Holdings {
         this.sellchg = sellchg;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type == null ? null : type.trim();
-    }
-
     public Date getDate() {
         return date;
     }
@@ -112,4 +142,27 @@ public class Holdings {
     public void setDate(Date date) {
         this.date = date;
     }
+    public Holdings(Integer id, String productid, String delivermonth, Integer rank, String volumcomp, Integer cj,
+			Integer cjchg, String bcomp, Integer buy, Integer buychg, String scomp, Integer sell, Integer sellchg,
+			Date date) {
+		super();
+		this.id = id;
+		this.productid = productid;
+		this.delivermonth = delivermonth;
+		this.rank = rank;
+		this.volumcomp = volumcomp;
+		this.cj = cj;
+		this.cjchg = cjchg;
+		this.bcomp = bcomp;
+		this.buy = buy;
+		this.buychg = buychg;
+		this.scomp = scomp;
+		this.sell = sell;
+		this.sellchg = sellchg;
+		this.date = date;
+	}
+
+	public Holdings() {
+		super();
+	}
 }

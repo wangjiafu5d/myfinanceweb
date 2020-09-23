@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jsoup.Connection.Response;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -24,7 +23,7 @@ public class GetDec {
 //			 for(String key:cookies.keySet()) {
 //				 System.out.println(key+"="+cookies.get(key)+";");
 //			 }
-	        Map data = new HashMap<String, String>();
+	        Map<String, String> data = new HashMap<String, String>();
 	        data.put("memberDealPosiQuotes.variety", "c");
 	        data.put("memberDealPosiQuotes.trade_type", "0");
 	        data.put("year", "2020");

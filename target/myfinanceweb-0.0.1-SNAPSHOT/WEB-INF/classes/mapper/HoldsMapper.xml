@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chuan.myfinanceweb.dao.HoldsMapper">
+  <resultMap id="BaseResultMap" type="com.chuan.myfinanceweb.bean.Holds">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="goods" jdbcType="CHAR" property="goods" />
+    <result column="date" jdbcType="DATE" property="date" />
+    <result column="rate" jdbcType="INTEGER" property="rate" />
+    <result column="compName" jdbcType="CHAR" property="compname" />
+    <result column="type" jdbcType="CHAR" property="type" />
+    <result column="value" jdbcType="INTEGER" property="value" />
+    <result column="increase" jdbcType="INTEGER" property="increase" />
+    <result column="agreement" jdbcType="CHAR" property="agreement" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, goods, date, rate, compName, type, value, increase, agreement
+  </sql>
+  <select id="selectAll" resultMap="BaseResultMap">SELECT * FROM Holds h where h.goods = #{goods,jdbcType=CHAR} and h.date = #{date,jdbcType=DATE} and compname = #{comp}</select>
+  <select id="selectByExample" parameterType="com.chuan.myfinanceweb.bean.HoldsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from holds
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.chuan.myfinanceweb.bean.HoldsExample">
+    delete from holds
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.chuan.myfinanceweb.bean.Holds">
+    insert into holds (id, goods, date, rate, 
+      compName, type, value, increase, 
+      agreement)
+    values (#{id,jdbcType=INTEGER}, #{goods,jdbcType=CHAR}, #{date,jdbcType=DATE}, #{rate,jdbcType=INTEGER}, 
+      #{compname,jdbcType=CHAR}, #{type,jdbcType=CHAR}, #{value,jdbcType=INTEGER}, #{increase,jdbcType=INTEGER}, 
+      #{agreement,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.chuan.myfinanceweb.bean.Holds">
+    insert into holds
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="goods != null">
+        goods,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="rate != null">
+        rate,
+      </if>
+      <if test="compname != null">
+        compName,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="value != null">
+        value,
+      </if>
+      <if test="increase != null">
+        increase,
+      </if>
+      <if test="agreement != null">
+        agreement,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="goods != null">
+        #{goods,jdbcType=CHAR},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="rate != null">
+        #{rate,jdbcType=INTEGER},
+      </if>
+      <if test="compname != null">
+        #{compname,jdbcType=CHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="value != null">
+        #{value,jdbcType=INTEGER},
+      </if>
+      <if test="increase != null">
+        #{increase,jdbcType=INTEGER},
+      </if>
+      <if test="agreement != null">
+        #{agreement,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.chuan.myfinanceweb.bean.HoldsExample" resultType="java.lang.Long">
+    select count(*) from holds
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update holds
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.goods != null">
+        goods = #{record.goods,jdbcType=CHAR},
+      </if>
+      <if test="record.date != null">
+        date = #{record.date,jdbcType=DATE},
+      </if>
+      <if test="record.rate != null">
+        rate = #{record.rate,jdbcType=INTEGER},
+      </if>
+      <if test="record.compname != null">
+        compName = #{record.compname,jdbcType=CHAR},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=CHAR},
+      </if>
+      <if test="record.value != null">
+        value = #{record.value,jdbcType=INTEGER},
+      </if>
+      <if test="record.increase != null">
+        increase = #{record.increase,jdbcType=INTEGER},
+      </if>
+      <if test="record.agreement != null">
+        agreement = #{record.agreement,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update holds
+    set id = #{record.id,jdbcType=INTEGER},
+      goods = #{record.goods,jdbcType=CHAR},
+      date = #{record.date,jdbcType=DATE},
+      rate = #{record.rate,jdbcType=INTEGER},
+      compName = #{record.compname,jdbcType=CHAR},
+      type = #{record.type,jdbcType=CHAR},
+      value = #{record.value,jdbcType=INTEGER},
+      increase = #{record.increase,jdbcType=INTEGER},
+      agreement = #{record.agreement,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

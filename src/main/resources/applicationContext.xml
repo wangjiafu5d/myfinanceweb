@@ -16,6 +16,7 @@
 			type="annotation"
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
+	<!-- ioc通过id注入对象 -->
 	<!-- <bean
 		id="dds"
 		class="com.chuan.myfinanceweb.bean.Dailydata"></bean> -->

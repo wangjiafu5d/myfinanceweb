@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chuan.myfinanceweb.dao.DailydatasumMapper">
+  <resultMap id="BaseResultMap" type="com.chuan.myfinanceweb.bean.Dailydatasum">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="date" jdbcType="DATE" property="date" />
+    <result column="PRODUCTNAME" jdbcType="CHAR" property="productname" />
+    <result column="HIGHESTPRICE" jdbcType="DOUBLE" property="highestprice" />
+    <result column="LOWESTPRICE" jdbcType="DOUBLE" property="lowestprice" />
+    <result column="AVGPRICE" jdbcType="DOUBLE" property="avgprice" />
+    <result column="VOLUME" jdbcType="INTEGER" property="volume" />
+    <result column="OPENINTEREST" jdbcType="INTEGER" property="openinterest" />
+    <result column="TURNOVER" jdbcType="DOUBLE" property="turnover" />
+    <result column="YEARVOLUME" jdbcType="DOUBLE" property="yearvolume" />
+    <result column="YEARTURNOVER" jdbcType="DOUBLE" property="yearturnover" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, date, PRODUCTNAME, HIGHESTPRICE, LOWESTPRICE, AVGPRICE, VOLUME, OPENINTEREST, 
+    TURNOVER, YEARVOLUME, YEARTURNOVER
+  </sql>
+  <select id="selectByExample" parameterType="com.chuan.myfinanceweb.bean.DailydatasumExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from dailydatasum
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.chuan.myfinanceweb.bean.DailydatasumExample">
+    delete from dailydatasum
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.chuan.myfinanceweb.bean.Dailydatasum">
+    insert into dailydatasum (id, date, PRODUCTNAME, 
+      HIGHESTPRICE, LOWESTPRICE, AVGPRICE, 
+      VOLUME, OPENINTEREST, TURNOVER, 
+      YEARVOLUME, YEARTURNOVER)
+    values (#{id,jdbcType=INTEGER}, #{date,jdbcType=DATE}, #{productname,jdbcType=CHAR}, 
+      #{highestprice,jdbcType=DOUBLE}, #{lowestprice,jdbcType=DOUBLE}, #{avgprice,jdbcType=DOUBLE}, 
+      #{volume,jdbcType=INTEGER}, #{openinterest,jdbcType=INTEGER}, #{turnover,jdbcType=DOUBLE}, 
+      #{yearvolume,jdbcType=DOUBLE}, #{yearturnover,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.chuan.myfinanceweb.bean.Dailydatasum">
+    insert into dailydatasum
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="productname != null">
+        PRODUCTNAME,
+      </if>
+      <if test="highestprice != null">
+        HIGHESTPRICE,
+      </if>
+      <if test="lowestprice != null">
+        LOWESTPRICE,
+      </if>
+      <if test="avgprice != null">
+        AVGPRICE,
+      </if>
+      <if test="volume != null">
+        VOLUME,
+      </if>
+      <if test="openinterest != null">
+        OPENINTEREST,
+      </if>
+      <if test="turnover != null">
+        TURNOVER,
+      </if>
+      <if test="yearvolume != null">
+        YEARVOLUME,
+      </if>
+      <if test="yearturnover != null">
+        YEARTURNOVER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="productname != null">
+        #{productname,jdbcType=CHAR},
+      </if>
+      <if test="highestprice != null">
+        #{highestprice,jdbcType=DOUBLE},
+      </if>
+      <if test="lowestprice != null">
+        #{lowestprice,jdbcType=DOUBLE},
+      </if>
+      <if test="avgprice != null">
+        #{avgprice,jdbcType=DOUBLE},
+      </if>
+      <if test="volume != null">
+        #{volume,jdbcType=INTEGER},
+      </if>
+      <if test="openinterest != null">
+        #{openinterest,jdbcType=INTEGER},
+      </if>
+      <if test="turnover != null">
+        #{turnover,jdbcType=DOUBLE},
+      </if>
+      <if test="yearvolume != null">
+        #{yearvolume,jdbcType=DOUBLE},
+      </if>
+      <if test="yearturnover != null">
+        #{yearturnover,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.chuan.myfinanceweb.bean.DailydatasumExample" resultType="java.lang.Long">
+    select count(*) from dailydatasum
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update dailydatasum
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.date != null">
+        date = #{record.date,jdbcType=DATE},
+      </if>
+      <if test="record.productname != null">
+        PRODUCTNAME = #{record.productname,jdbcType=CHAR},
+      </if>
+      <if test="record.highestprice != null">
+        HIGHESTPRICE = #{record.highestprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.lowestprice != null">
+        LOWESTPRICE = #{record.lowestprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.avgprice != null">
+        AVGPRICE = #{record.avgprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.volume != null">
+        VOLUME = #{record.volume,jdbcType=INTEGER},
+      </if>
+      <if test="record.openinterest != null">
+        OPENINTEREST = #{record.openinterest,jdbcType=INTEGER},
+      </if>
+      <if test="record.turnover != null">
+        TURNOVER = #{record.turnover,jdbcType=DOUBLE},
+      </if>
+      <if test="record.yearvolume != null">
+        YEARVOLUME = #{record.yearvolume,jdbcType=DOUBLE},
+      </if>
+      <if test="record.yearturnover != null">
+        YEARTURNOVER = #{record.yearturnover,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update dailydatasum
+    set id = #{record.id,jdbcType=INTEGER},
+      date = #{record.date,jdbcType=DATE},
+      PRODUCTNAME = #{record.productname,jdbcType=CHAR},
+      HIGHESTPRICE = #{record.highestprice,jdbcType=DOUBLE},
+      LOWESTPRICE = #{record.lowestprice,jdbcType=DOUBLE},
+      AVGPRICE = #{record.avgprice,jdbcType=DOUBLE},
+      VOLUME = #{record.volume,jdbcType=INTEGER},
+      OPENINTEREST = #{record.openinterest,jdbcType=INTEGER},
+      TURNOVER = #{record.turnover,jdbcType=DOUBLE},
+      YEARVOLUME = #{record.yearvolume,jdbcType=DOUBLE},
+      YEARTURNOVER = #{record.yearturnover,jdbcType=DOUBLE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

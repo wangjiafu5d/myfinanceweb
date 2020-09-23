@@ -1,7 +1,6 @@
 package com.chuan.myfinanceweb.utils;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
@@ -13,10 +12,8 @@ import java.util.List;
 import java.util.Properties;
 
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -61,7 +58,7 @@ public static List<DailyData> getData(String strDate) {
 	try {
 	    String year = strDate.substring(0, 4);
 	    webDriver.get("http://www.czce.com.cn/");
-	    Document doc = Jsoup.parse(webDriver.getPageSource());
+	    webDriver.getPageSource();
 //	    System.out.println(doc);
 	    webDriver.get("http://www.czce.com.cn/cn/DFSStaticFiles/Future/"+year+"/"+strDate+"/FutureDataDaily.htm");
 	    
@@ -77,7 +74,7 @@ public static List<DailyData> getData(String strDate) {
 			}
 	    	if(tds.get(0).html().length()>3&&tds.get(0).html().length()<7) {
 	    		String productId = tds.get(0).html().substring(0, 2).toLowerCase();
-	    		String productName = GetGoodsIdAndName.Instance.czceId.getProperty(productId);
+	    		String productName = GetGoodsIdAndName.czceId.getProperty(productId);
 	    		String delivermonth = "2"+tds.get(0).html().substring(2, 5);
 	    		dailyData.setProductid(productId);
 	    		dailyData.setProductname(productName);

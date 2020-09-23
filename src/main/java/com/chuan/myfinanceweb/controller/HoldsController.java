@@ -36,7 +36,7 @@ public class HoldsController {
 		return list;
 	}
 	@RequestMapping("/getholds")
-	public String getH() {
+	public String getH() {		
 		return "getholds";
 	}
 	@RequestMapping("/getIndex")
