@@ -78,7 +78,7 @@ public class DailyDataOfDce {
 				dailyData.setOpeninterestchg(Integer.valueOf(tds.get(12).html()));
 				dailyData.setDate(realDate);
 				list.add(dailyData);
-				System.out.println(dailyData);
+//				System.out.println(dailyData);
 			}else {
 				continue ;
 			}

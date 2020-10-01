@@ -92,7 +92,7 @@ public static List<DailyData> getData(String strDate) {
 	    		dailyData.setOpeninterestchg(Integer.valueOf(tds.get(11).html()));
 	    		dailyData.setDate(realDate);
 	    		
-	    		System.out.println(dailyData);
+//	    		System.out.println(dailyData);
 		    	list.add(dailyData);
 	    	}
 		}

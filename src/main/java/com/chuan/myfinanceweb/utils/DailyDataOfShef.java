@@ -81,7 +81,7 @@ public class DailyDataOfShef {
 			list.add(dailyData);
 			map.put(dailyData.getProductid(), dailyData.getProductname());
 		};
-		System.out.println(list.size());
+//		System.out.println(list.size());
 		for(String key : map.keySet()) {
 			System.out.println(map.get(key)+"="+key);
 		}
