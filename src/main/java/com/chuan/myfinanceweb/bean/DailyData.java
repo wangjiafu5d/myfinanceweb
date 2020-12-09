@@ -167,7 +167,7 @@ public class DailyData {
 			BigDecimal presettlementprice, BigDecimal openprice, BigDecimal highestprice, BigDecimal lowestprice,
 			BigDecimal closeprice, BigDecimal settlementprice, BigDecimal zd1Chg, BigDecimal zd2Chg, Integer volume,
 			Integer openinterest, Integer openinterestchg, Date date) {
-		super();
+		
 		this.id = id;
 		this.productid = productid;
 		this.productname = productname;

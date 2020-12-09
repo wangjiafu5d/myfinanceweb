@@ -26,7 +26,7 @@ public class DailyDataOfDce {
 	public static List<DailyData> getData(String strDate) {
 		List<DailyData> list = new ArrayList<DailyData>();
 		Map<String, String> data = new HashMap<String, String>();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date realDate = null;
 		try {
 			realDate = sdf.parse(strDate);

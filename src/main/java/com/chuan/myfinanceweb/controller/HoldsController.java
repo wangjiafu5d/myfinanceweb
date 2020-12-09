@@ -30,7 +30,7 @@ public class HoldsController {
 	@RequestMapping(value="/holds",params="s")
 	@ResponseBody
 	public List<Holds> getHolds(@RequestParam(value="date") String strDate,@RequestParam(value="goods")String goods,@RequestParam(value="comp")String comp,@RequestParam(value="s")String s) throws ParseException {
-
+		System.out.println(s);
 		Date date = Date.valueOf(strDate);
 		List<Holds> list = holdsService.getByDateGoodsAndComp(date, goods, comp);		
 		return list;
@@ -39,7 +39,7 @@ public class HoldsController {
 	public String getH() {		
 		return "getholds";
 	}
-	@RequestMapping("/getIndex")
+	@RequestMapping("/index")
 	public String getIndex() {
 		return "index";
 	}
@@ -48,4 +48,13 @@ public class HoldsController {
 		com.chuan.myfinanceweb.utils.GetHtml.getData();
 		return "index";
 	}
+	
+//	@RequestMapping("/redirect")
+//	public String redirect() {		
+//		return "redirect:/datepicker";
+//	}
+//	@RequestMapping("/datepicker")
+//	public String datepicker() {		
+//		return "datepicker";
+//	}
 }

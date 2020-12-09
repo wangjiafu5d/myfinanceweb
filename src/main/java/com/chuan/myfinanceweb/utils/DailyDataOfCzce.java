@@ -26,7 +26,7 @@ public static void main(String[] args) {
 }
 public static List<DailyData> getData(String strDate) {
 	List<DailyData> list = new ArrayList<DailyData>();
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	Date realDate = null;
 	try {
 		realDate = sdf.parse(strDate);
@@ -60,7 +60,7 @@ public static List<DailyData> getData(String strDate) {
 	    webDriver.get("http://www.czce.com.cn/");
 	    webDriver.getPageSource();
 //	    System.out.println(doc);
-	    webDriver.get("http://www.czce.com.cn/cn/DFSStaticFiles/Future/"+year+"/"+strDate+"/FutureDataDaily.htm");
+	    webDriver.get("http://www.czce.com.cn/cn/DFSStaticFiles/Future/"+year+"/"+strDate.replaceAll("-", "")+"/FutureDataDaily.htm");
 	    
 	    Element table = Jsoup.parse(webDriver.getPageSource()).select("tbody").first();
 	    Elements trs = table.select("tr");
@@ -92,7 +92,7 @@ public static List<DailyData> getData(String strDate) {
 	    		dailyData.setOpeninterestchg(Integer.valueOf(tds.get(11).html()));
 	    		dailyData.setDate(realDate);
 	    		
-//	    		System.out.println(dailyData);
+	    		System.out.println(dailyData);
 		    	list.add(dailyData);
 	    	}
 		}
@@ -107,4 +107,5 @@ public static List<DailyData> getData(String strDate) {
 	
 	return list;
 }
+
 }

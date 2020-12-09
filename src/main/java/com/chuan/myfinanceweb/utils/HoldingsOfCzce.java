@@ -30,7 +30,7 @@ public static void main(String[] args) {
 }
 public static List<Holdings> getData(String strDate) {
 	List<Holdings> list = new ArrayList<Holdings>();
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	Date realDate = null;
 	try {
 		realDate = sdf.parse(strDate);

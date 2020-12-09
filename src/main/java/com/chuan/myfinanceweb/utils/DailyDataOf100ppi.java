@@ -22,11 +22,11 @@ public class DailyDataOf100ppi {
 		getData("20200903");
 	}
 
-	public static void getData(String strDate) {
+	public static List<DataOf100ppi> getData(String strDate) {
 		
 		List<DataOf100ppi> list = new ArrayList<DataOf100ppi>();
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date realDate = null;
 		try {
 			realDate = sdf.parse(strDate);
@@ -36,7 +36,7 @@ public class DailyDataOf100ppi {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(realDate);
 		
-		String url = "http://www.100ppi.com/sf/day-"+strDate.substring(0,4)+"-"+strDate.substring(4,6)+"-"+strDate.substring(6,8)+".html";
+		String url = "http://www.100ppi.com/sf/day-"+strDate+".html";
 		Document doc = null;
 		try {
 			doc = Jsoup.connect(url).get();
@@ -94,7 +94,7 @@ public class DailyDataOf100ppi {
 			
 		}
 		
-		
+		return list;
 		
 		
 		

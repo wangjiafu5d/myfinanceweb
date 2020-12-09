@@ -38,8 +38,9 @@
 
 
 		<!-- table指定每个表的生成策略 -->
-		<table tableName="holdings" domainObjectName="Holdings"></table>
+		<table tableName="myuser" domainObjectName="User"></table>
+	<!-- 	<table tableName="holdings" domainObjectName="Holdings"></table>
 		<table tableName="dailydata" domainObjectName="DailyData"></table> 
-		<table tableName="dataof100ppi" domainObjectName="DataOf100ppi"></table>
+		<table tableName="dataof100ppi" domainObjectName="DataOf100ppi"></table> -->
 	</context>
 </generatorConfiguration>

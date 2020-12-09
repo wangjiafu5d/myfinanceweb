@@ -15,7 +15,7 @@ import org.jsoup.nodes.Element;
 public class IsTradeDay {
 	public static boolean checkDate(String strDate) {
 		Map<String, String> data = new HashMap<String, String>();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date realDate = null;
 		try {
 			realDate = sdf.parse(strDate);
