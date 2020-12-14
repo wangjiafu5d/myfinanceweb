@@ -72,7 +72,9 @@ public class DailyDataOfShef {
 			dailyData.setCloseprice(new BigDecimal(IsBlank.stringIsBlank(data.getAsJsonPrimitive("CLOSEPRICE").getAsString())));
 			dailyData.setSettlementprice(new BigDecimal(IsBlank.stringIsBlank(data.getAsJsonPrimitive("SETTLEMENTPRICE").getAsString())));
 			dailyData.setZd1Chg(new BigDecimal(IsBlank.stringIsBlank(data.getAsJsonPrimitive("ZD1_CHG").getAsString())));
-			
+			if(data.getAsJsonPrimitive("ZD2_CHG").toString().equals("\"\"")) {
+				continue ;
+			}
 			dailyData.setZd2Chg(new BigDecimal(IsBlank.stringIsBlank(data.getAsJsonPrimitive("ZD2_CHG").toString())));
 			dailyData.setVolume(Integer.valueOf(IsBlank.stringIsBlank(data.getAsJsonPrimitive("VOLUME").getAsString())));
 			dailyData.setOpeninterest(Integer.valueOf(IsBlank.stringIsBlank(data.getAsJsonPrimitive("OPENINTEREST").getAsString())));

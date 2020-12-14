@@ -5,7 +5,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="productid" jdbcType="CHAR" property="productid" />
     <result column="delivermonth" jdbcType="CHAR" property="delivermonth" />
-    <result column="rank" jdbcType="INTEGER" property="rank" />
+    <result column="_rank" jdbcType="INTEGER" property="rank" />
     <result column="volumcomp" jdbcType="CHAR" property="volumcomp" />
     <result column="cj" jdbcType="INTEGER" property="cj" />
     <result column="cjchg" jdbcType="INTEGER" property="cjchg" />
@@ -76,7 +76,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, productid, delivermonth, rank, volumcomp, cj, cjchg, bcomp, buy, buychg, scomp, 
+    id, productid, delivermonth, _rank, volumcomp, cj, cjchg, bcomp, buy, buychg, scomp, 
     sell, sellchg, date
   </sql>
   <select id="selectByExample" parameterType="com.chuan.myfinanceweb.bean.HoldingsExample" resultMap="BaseResultMap">
@@ -111,7 +111,7 @@
   </delete>
   <insert id="insert" parameterType="com.chuan.myfinanceweb.bean.Holdings">
     insert into holdings (id, productid, delivermonth, 
-      rank, volumcomp, cj, cjchg, 
+      _rank, volumcomp, cj, cjchg, 
       bcomp, buy, buychg, scomp, 
       sell, sellchg, date)
     values (#{id,jdbcType=INTEGER}, #{productid,jdbcType=CHAR}, #{delivermonth,jdbcType=CHAR}, 
@@ -132,7 +132,7 @@
         delivermonth,
       </if>
       <if test="rank != null">
-        rank,
+        _rank,
       </if>
       <if test="volumcomp != null">
         volumcomp,
@@ -229,7 +229,7 @@
         delivermonth = #{record.delivermonth,jdbcType=CHAR},
       </if>
       <if test="record.rank != null">
-        rank = #{record.rank,jdbcType=INTEGER},
+        _rank = #{record.rank,jdbcType=INTEGER},
       </if>
       <if test="record.volumcomp != null">
         volumcomp = #{record.volumcomp,jdbcType=CHAR},
@@ -271,7 +271,7 @@
     set id = #{record.id,jdbcType=INTEGER},
       productid = #{record.productid,jdbcType=CHAR},
       delivermonth = #{record.delivermonth,jdbcType=CHAR},
-      rank = #{record.rank,jdbcType=INTEGER},
+      _rank = #{record.rank,jdbcType=INTEGER},
       volumcomp = #{record.volumcomp,jdbcType=CHAR},
       cj = #{record.cj,jdbcType=INTEGER},
       cjchg = #{record.cjchg,jdbcType=INTEGER},
@@ -296,7 +296,7 @@
         delivermonth = #{delivermonth,jdbcType=CHAR},
       </if>
       <if test="rank != null">
-        rank = #{rank,jdbcType=INTEGER},
+        _rank = #{rank,jdbcType=INTEGER},
       </if>
       <if test="volumcomp != null">
         volumcomp = #{volumcomp,jdbcType=CHAR},
@@ -335,7 +335,7 @@
     update holdings
     set productid = #{productid,jdbcType=CHAR},
       delivermonth = #{delivermonth,jdbcType=CHAR},
-      rank = #{rank,jdbcType=INTEGER},
+      _rank = #{rank,jdbcType=INTEGER},
       volumcomp = #{volumcomp,jdbcType=CHAR},
       cj = #{cj,jdbcType=INTEGER},
       cjchg = #{cjchg,jdbcType=INTEGER},

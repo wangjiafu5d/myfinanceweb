@@ -165,4 +165,9 @@ public class Holdings {
 	public Holdings() {
 		super();
 	}
+	@Override
+	public String toString() {
+		return id+"_"+productid+"_"+delivermonth+"_"+rank+"_"+volumcomp+"_"+cj+"_"+cjchg
+				+"_"+bcomp+"_"+buy+"_"+buychg+"_"+scomp+"_"+sell+"_"+sellchg+"_"+date;
+	}
 }

@@ -25,7 +25,7 @@ public class HoldingsOfCzce {
 
 public static void main(String[] args) {
 	long start = System.currentTimeMillis();
-	getData("20200903");
+	getData("2020-12-01");
 	System.out.println(System.currentTimeMillis() - start);
 }
 public static List<Holdings> getData(String strDate) {
@@ -64,7 +64,7 @@ public static List<Holdings> getData(String strDate) {
 	    webDriver.get("http://www.czce.com.cn/");
 	    webDriver.getPageSource();
 //	    System.out.println(doc);
-	    webDriver.get("http://www.czce.com.cn/cn/DFSStaticFiles/Future/"+year+"/"+strDate+"/FutureDataHolding.htm");
+	    webDriver.get("http://www.czce.com.cn/cn/DFSStaticFiles/Future/"+year+"/"+strDate.replace("-", "")+"/FutureDataHolding.htm");
 	    
 	    Element table = Jsoup.parse(webDriver.getPageSource()).select("tbody").first();
 	    Elements trs = table.select("tr");
@@ -90,7 +90,7 @@ public static List<Holdings> getData(String strDate) {
 	    				tds.get(i).html("0");
 	    			}
 	    		}
-	    		Integer rank = Integer.valueOf(999);
+	    		Integer rank = Integer.valueOf("999");
 
 				String volumcomp = "total";
 

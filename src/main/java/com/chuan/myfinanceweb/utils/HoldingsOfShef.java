@@ -19,12 +19,12 @@ import com.google.gson.JsonObject;
 public class HoldingsOfShef {
 	public static void main(String[] args) {
 		long start = System.currentTimeMillis();		
-		getData("20200918");
+		getData("2020-12-01");
 		System.out.println(System.currentTimeMillis()-start);
 	}
 	public static List<Holdings> getData(String strDate) {
 		List<Holdings> list = new ArrayList<Holdings>();
-		String url = "http://www.shfe.com.cn/data/dailydata/kx/pm" + strDate + ".dat";
+		String url = "http://www.shfe.com.cn/data/dailydata/kx/pm" + strDate.replace("-", "") + ".dat";
 		Document doc = null;
 		try {
 			doc = Jsoup.connect(url).timeout(30000).get();
@@ -39,7 +39,7 @@ public class HoldingsOfShef {
 		JsonArray jarr = jobj.getAsJsonArray("o_cursor");
 //		System.out.println(jarr);
 //		System.out.println(jobj.getAsJsonPrimitive("o_weekday"));
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
 		Date  realDate = null;
 		try {

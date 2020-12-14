@@ -43,10 +43,17 @@
 				}
 				});
         }
+        function login(){
+        	window.location.replace("login");
+        }
+        function manage(){
+        	window.location.replace("manage");
+        }
     </script>
   </head>
   <body>
-    <button id="reqbutton" class="btn btn-success">请求按钮</button>
+    <button id="reqbutton1" class="btn btn-success" onclick="login()">登录</button>
+    <button id="reqbutton2" class="btn btn-success" onclick="manage()">管理数据</button>
     <p id="p1">数据</p>
     <div id="form-div">
     <form id="form1" style="margin:0px;display:inline;" onsubmit="return false" action="##" method="post">

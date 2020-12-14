@@ -57,6 +57,8 @@ button {
 </style>
 </head>
 <body>
+<p>管理员账号：myfinanceweb</p>
+<p>管理员密码：myfinanceweb31415926</p>
 	<form id="form1">
 		<div class="form-group">
 			<label for="exampleInputEmail1">User Name</label> <input type="text"

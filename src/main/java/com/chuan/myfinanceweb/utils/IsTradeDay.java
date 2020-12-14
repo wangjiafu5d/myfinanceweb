@@ -38,8 +38,8 @@ public class IsTradeDay {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Element dataArea = doc.getElementsByClass("tradeResult02").first();
+//		Element dataArea = doc.getElementsByClass("tradeResult02").first();
 //		System.out.println(dataArea.select("span").get(0).html());
-		return dataArea.select("span").get(0).html().contains("交易日");
+		return doc.html().contains("交易日");
 	}
 }

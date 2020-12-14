@@ -31,7 +31,8 @@ function checkdate(d1,d2){
 				dataType: "json",
 				data: "start_date="+start_date+"&&end_date="+end_date+"&&website="+website,
 				success:function(response){
-					console.log(response);	
+					console.log(response);
+					alert("操作成功");
 				}
 				});
         }
@@ -51,6 +52,7 @@ function checkdate(d1,d2){
     				data: "_method=PUT"+"&&start_date="+start_date+"&&end_date="+end_date+"&&website="+website,
     				success:function(response){
     					console.log(response);	
+    					alert("操作成功");
     				}
     				});
             }
@@ -70,6 +72,7 @@ function checkdate(d1,d2){
     				data: "_method=DELETE"+"&&start_date="+start_date+"&&end_date="+end_date+"&&website="+website,
     				success:function(response){
     					console.log(response);	
+    					alert("操作成功");
     				}
     				});
             	

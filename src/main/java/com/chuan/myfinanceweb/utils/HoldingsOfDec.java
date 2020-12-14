@@ -24,14 +24,14 @@ import com.chuan.myfinanceweb.bean.Holdings;
 public class HoldingsOfDec {
 	public static void main(String[] args) {
 		long start = System.currentTimeMillis();
-		getData("20200914");
+		getData("2020-12-01");
 		System.out.println(System.currentTimeMillis() - start);
 	}
 
 	public static List<Holdings> getData(String strDate) {
 		List<Holdings> list = new ArrayList<Holdings>();
 		Map<String, String> data = new HashMap<String, String>();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date realDate = null;
 		try {
 			realDate = sdf.parse(strDate);
@@ -119,7 +119,7 @@ public class HoldingsOfDec {
 
 			Elements tds = tr.select("td");
 			if (tds.size() == 12) {
-				Integer rank = Integer.valueOf(999);
+				Integer rank = Integer.valueOf("999");
 
 				String volumcomp = "total";
 
