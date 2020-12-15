@@ -2,6 +2,8 @@ package com.chuan.myfinanceweb.controller;
 
 import java.text.ParseException;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -47,10 +49,16 @@ public class ManageController {
 	@ResponseBody
 	public Msg insert(@RequestParam(value="start_date") String startDate,@RequestParam(value="end_date")String endDate,@RequestParam(value="website")String website) throws ParseException {
 		System.out.println(startDate+endDate+website);
-		dailyDataService.deleteDailyData(startDate, endDate, website);
-		dailyDataService.insertDailyData(startDate, endDate, website);
-		holdingservice.deleteHoldings(startDate, endDate, website);
-		holdingservice.insertHoldings(startDate, endDate, website);
+		ExecutorService executor = Executors.newSingleThreadExecutor();
+	    executor.submit(()->{dailyDataService.deleteDailyData(startDate, endDate, website);});
+	    executor.submit(()->{holdingservice.deleteHoldings(startDate, endDate, website);});
+	    executor.submit(()->{dailyDataService.insertDailyData(startDate, endDate, website);});
+	    executor.submit(()->{holdingservice.insertHoldings(startDate, endDate, website);});
+	    executor.shutdown();
+		
+		
+		
+		
 		Msg msg = new Msg();
 		msg.setMsg("insert");
 		return msg;
@@ -59,8 +67,11 @@ public class ManageController {
 	@ResponseBody
 	public Msg delete(@RequestParam(value="start_date") String startDate,@RequestParam(value="end_date")String endDate,@RequestParam(value="website")String website) throws ParseException {
 		System.out.println(startDate+endDate+website);
-		dailyDataService.deleteDailyData(startDate, endDate, website);
-		holdingservice.deleteHoldings(startDate, endDate, website);
+		ExecutorService executor = Executors.newSingleThreadExecutor();
+	    executor.submit(()->{dailyDataService.deleteDailyData(startDate, endDate, website);});
+	    executor.submit(()->{holdingservice.deleteHoldings(startDate, endDate, website);});
+	  
+	    executor.shutdown();
 		Msg msg = new Msg();
 		msg.setMsg("delete");
 		return msg;
@@ -69,10 +80,12 @@ public class ManageController {
 	@ResponseBody
 	public Msg update(@RequestParam(value="start_date") String startDate,@RequestParam(value="end_date")String endDate,@RequestParam(value="website")String website) throws ParseException {
 		System.out.println(startDate+endDate+website);
-		dailyDataService.deleteDailyData(startDate, endDate, website);
-		dailyDataService.insertDailyData(startDate, endDate, website);
-		holdingservice.deleteHoldings(startDate, endDate, website);
-		holdingservice.insertHoldings(startDate, endDate, website);
+		ExecutorService executor = Executors.newSingleThreadExecutor();
+	    executor.submit(()->{dailyDataService.deleteDailyData(startDate, endDate, website);});
+	    executor.submit(()->{holdingservice.deleteHoldings(startDate, endDate, website);});
+	    executor.submit(()->{dailyDataService.insertDailyData(startDate, endDate, website);});
+	    executor.submit(()->{holdingservice.insertHoldings(startDate, endDate, website);});
+	    executor.shutdown();
 		Msg msg = new Msg();
 		msg.setMsg("update");
 		return msg;

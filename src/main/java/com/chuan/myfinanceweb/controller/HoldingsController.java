@@ -1,7 +1,7 @@
 package com.chuan.myfinanceweb.controller;
 import java.sql.Date;
 import java.text.ParseException;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.chuan.myfinanceweb.bean.Holdings;
 import com.chuan.myfinanceweb.bean.Holds;
 import com.chuan.myfinanceweb.service.HoldingsService;
 @Controller
 public class HoldingsController {
 	@Autowired
-	HoldingsService holdsService;
+	HoldingsService holdingsService;
+	
 //	@RequestMapping("/holds")
 //	@ResponseBody
 //	public List<Holds> getHolds(@RequestParam(value="date") String strDate,@RequestParam(value="goods")String goods,@RequestParam(value="comp")String comp,Model model) throws ParseException {
@@ -61,4 +63,13 @@ public class HoldingsController {
 //	public String datepicker() {		
 //		return "datepicker";
 //	}
+	@RequestMapping("/holds")
+ 	@ResponseBody
+	public List<Holdings> getHoldings(@RequestParam(value="date") String date,@RequestParam(value="productid")String productid,@RequestParam(value="delivermonth")String delivermonth,Model model){
+		List<Holdings> list = new ArrayList<Holdings>();
+		list = holdingsService.selectHoldingsByDate(date, productid, delivermonth);
+		
+		return list;
+		
+	}
 }

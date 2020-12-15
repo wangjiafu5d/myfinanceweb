@@ -21,6 +21,8 @@ import com.chuan.myfinanceweb.bean.HoldingsExample;
 import com.chuan.myfinanceweb.bean.HoldingsExample.Criteria;
 import com.chuan.myfinanceweb.dao.HoldingsMapper;
 import com.chuan.myfinanceweb.utils.DayOffSet;
+import com.chuan.myfinanceweb.utils.HoldingsOfCzce;
+import com.chuan.myfinanceweb.utils.HoldingsOfDec;
 import com.chuan.myfinanceweb.utils.HoldingsOfShef;
 import com.chuan.myfinanceweb.utils.IsTradeDay;
 
@@ -95,18 +97,19 @@ public class HoldingsService {
 			if (website.equals("全部") || website.equals("上交所")) {
 				exec.execute(() -> {
 					vector.add(HoldingsOfShef.getData(updateDate));
+					System.out.println("上交所");
 					latch.countDown();
 				});
 			}
 			if (website.equals("全部") || website.equals("大商所")) {
 				exec.execute(() -> {
-					vector.add(HoldingsOfShef.getData(updateDate));
+					vector.add(HoldingsOfDec.getData(updateDate));
 					latch.countDown();
 				});
 			}
 			if (website.equals("全部") || website.equals("郑商所")) {
 				exec.execute(() -> {
-					vector.add(HoldingsOfShef.getData(updateDate));
+					vector.add(HoldingsOfCzce.getData(updateDate));
 					latch.countDown();
 				});
 			}			
@@ -148,17 +151,19 @@ public class HoldingsService {
 		holdingsMapper.deleteByExample(example);
 		
 	}
-	public List<Holdings> selectHoldingsByDate(String startDate, String endDate){
+	public List<Holdings> selectHoldingsByDate(String date,String productid,String delivermonth){
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		List<Holdings> list = new ArrayList<Holdings>();
 		HoldingsExample example = new HoldingsExample();
 		Criteria criteria = example.createCriteria();
 		try {
-			criteria.andDateBetween(sdf.parse(startDate), sdf.parse(endDate));
+			criteria.andDateEqualTo(sdf.parse(date));
+			criteria.andProductidEqualTo(productid);
+			criteria.andDelivermonthEqualTo(delivermonth);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		example.setOrderByClause("delivermonth asc");
+		example.setOrderByClause("_rank asc");
 		list = holdingsMapper.selectByExample(example);
 		return list;
 	}

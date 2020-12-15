@@ -58,8 +58,8 @@
     <div id="form-div">
     <form id="form1" style="margin:0px;display:inline;" onsubmit="return false" action="##" method="post">
        <p style="margin:50px;display:inline;">日期：<input name="date" type="text" id="txtUserName" tabindex="1" size="15" value=""/></p>
-       <p style="margin:50px;display:inline;">商品代码：<input name="goods" type="text" id="TextBox2" tabindex="2" size="15" value=""/></p>
-         <p style="margin:50px;display:inline;">期货公司：<input name="comp" type="text" id="TextBox2" tabindex="3" size="15" value=""/></p>
+       <p style="margin:50px;display:inline;">商品代码：<input name="productid" type="text" id="TextBox2" tabindex="2" size="15" value=""/></p>
+         <p style="margin:50px;display:inline;">合约交割月：<input name="delivermonth" type="text" id="TextBox2" tabindex="3" size="15" value=""/></p>
         <p style="margin:50px;display:inline;"><input type="button" value="获取数据" onclick="getholds()">&nbsp;<input type="reset" value="重置"></p>
     </form>
 </div>
