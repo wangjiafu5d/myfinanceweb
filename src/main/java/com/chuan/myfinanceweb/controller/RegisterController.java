@@ -53,7 +53,7 @@ public class RegisterController {
 		HttpSession session = request.getSession(true);
 		if (list != null && list.size() == 1) {
 			msg.setCode(204);
-			map.put("response", "User name is already exist");
+			map.put("response", "用户名重复");
 			msg.setExtend(map);
 			return msg;
 		} else {

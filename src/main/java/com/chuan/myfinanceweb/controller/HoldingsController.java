@@ -1,8 +1,12 @@
 package com.chuan.myfinanceweb.controller;
+
 import java.sql.Date;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,12 +17,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.chuan.myfinanceweb.bean.Holdings;
 import com.chuan.myfinanceweb.bean.Holds;
+import com.chuan.myfinanceweb.service.CookieService;
 import com.chuan.myfinanceweb.service.HoldingsService;
+
 @Controller
 public class HoldingsController {
 	@Autowired
 	HoldingsService holdingsService;
-	
+
+	@Autowired
+	CookieService cookieService;
+
 //	@RequestMapping("/holds")
 //	@ResponseBody
 //	public List<Holds> getHolds(@RequestParam(value="date") String strDate,@RequestParam(value="goods")String goods,@RequestParam(value="comp")String comp,Model model) throws ParseException {
@@ -38,23 +47,28 @@ public class HoldingsController {
 //		return list;
 //	}
 	@RequestMapping("/getholds")
-	public String getH() {		
+	public String getH() {
 		return "getholds";
 	}
+
 	@RequestMapping("/index")
-	public String getIndex() {
+	public String getIndex(HttpServletRequest request, HttpServletResponse response) {
+		cookieService.checkCookie(request, response);
 		return "index";
 	}
+
 	@RequestMapping("/getHtml")
 	public String getHtml() {
 		com.chuan.myfinanceweb.utils.GetHtml.getData();
 		return "index";
 	}
+
 	@RequestMapping("/echart2")
 	public String echart2() {
-		
+
 		return "echart2";
 	}
+
 //	@RequestMapping("/redirect")
 //	public String redirect() {		
 //		return "redirect:/datepicker";
@@ -64,12 +78,15 @@ public class HoldingsController {
 //		return "datepicker";
 //	}
 	@RequestMapping("/holds")
- 	@ResponseBody
-	public List<Holdings> getHoldings(@RequestParam(value="date") String date,@RequestParam(value="productid")String productid,@RequestParam(value="delivermonth")String delivermonth,Model model){
+	@ResponseBody
+	public List<Holdings> getHoldings(@RequestParam(value = "date") String date,
+			@RequestParam(value = "productid") String productid,
+			@RequestParam(value = "delivermonth") String delivermonth, Model model) {
+
 		List<Holdings> list = new ArrayList<Holdings>();
 		list = holdingsService.selectHoldingsByDate(date, productid, delivermonth);
-		
+
 		return list;
-		
+
 	}
 }

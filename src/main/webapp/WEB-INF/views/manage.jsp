@@ -14,6 +14,8 @@
 <%
         pageContext.setAttribute("APP_PATH", request.getContextPath());
     %>
+    <link rel="shortcut icon" href="${APP_PATH}/static/img/favicon.ico"
+	type="image/x-icon" />
 <script>
 function checkdate(d1,d2){
 	let date1 = new Date(Date.parse(d1))
@@ -82,18 +84,15 @@ function checkdate(d1,d2){
     		}
        
 </script>
-
+<style>
+body {
+	margin: 5% 10% 0% 10%;
+	
+}
+</style>
 </head>
-<body>
-	<div id="app" align="center">
-		<el-row>
-		<span>&nbsp</span></el-row>
-		<el-row>
-		<span>&nbsp</span></el-row>
-		<el-row>
-		<span>&nbsp</span></el-row>
-		<el-row>
-		<span>&nbsp</span></el-row>
+<body background="${APP_PATH}/static/img/manage_background.jpg">
+	<div id="app" align="center">	
 		<p>数据管理</p>
 		<el-row> <el-col :span="24">
 		<template>
@@ -146,7 +145,7 @@ var Company = {
           label: '大商所'
         }, {
           value: '选项4',
-          label: '郑交所'
+          label: '郑商所'
         }, {
           value: '选项5',
           label: '生意社'

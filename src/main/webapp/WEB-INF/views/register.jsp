@@ -43,8 +43,7 @@ function reset() {
     </script>
 <style>
 body {
-	margin: 5% 40% 40% 40%;
-	width: 20%;
+	margin: 5% 40% 0% 40%;
 }
 
 button {
@@ -52,29 +51,29 @@ button {
 }
 </style>
 </head>
-<body>
+<body background="${APP_PATH}/static/img/register_background.jpg">
 	<form id="form1">
 		<div class="form-group">
-			<label for="exampleInputEmail1">User Name</label> <input type="text"
-				class="form-control" name="userName" placeholder="User Name">
+			<label for="exampleInputEmail1">用户名</label> <input type="text"
+				class="form-control" name="userName" placeholder="用户名">
 		</div>
 		<div class="form-group">
-			<label for="exampleInputPassword1">Password</label> <input
+			<label for="exampleInputPassword1">密码</label> <input
 				type="password" class="form-control" name="password"
-				placeholder="Password">
+				placeholder="密码">
 		</div>
 		<div class="form-group">
-			<label for="exampleInputPassword1">Email</label> <input
+			<label for="exampleInputPassword1">邮箱</label> <input
 				type="text" class="form-control" name="email"
-				placeholder="Email">
+				placeholder="邮箱">
 		</div>
 		<div class="form-group">
-			<label for="exampleInputPassword1">Phone Number</label> <input
+			<label for="exampleInputPassword1">手机号</label> <input
 				type="text" class="form-control" name="phoneNum"
-				placeholder="Phone Number">
+				placeholder="电话号码">
 		</div>	
-		<button type="button" class="btn btn-info" onclick="reset()">Reset</button>
-		<button type="button" class="btn btn-primary" onclick="register()">Submit</button>
+		<button type="button" class="btn btn-info" onclick="reset()">取消</button>
+		<button type="button" class="btn btn-primary" onclick="register()">提交</button>
 	</form>
 </body>
 </html>

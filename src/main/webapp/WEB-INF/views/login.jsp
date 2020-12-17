@@ -19,6 +19,8 @@
 	rel="stylesheet" />
 <script
 	src="https://cdn.bootcss.com/twitter-bootstrap/4.2.1/js/bootstrap.min.js"></script>
+	<link rel="shortcut icon" href="${APP_PATH}/static/img/favicon.ico"
+	type="image/x-icon" />
 <script>
 function login() {
 	var isChecked = $(".checkbox input").prop("checked");
@@ -34,7 +36,7 @@ function login() {
 			console.log(response);
 			if(response=="login"){
 				reset();
-				alert("User Name or Password is wrong")
+				alert("用户名或者密码错误")
 			}else{
 			window.location.replace(response);				
 			}
@@ -47,8 +49,7 @@ function reset() {
     </script>
 <style>
 body {
-	margin: 5% 40% 40% 40%;
-	width: 20%;
+	margin: 5% 40% 0% 40%;
 }
 
 button {
@@ -56,28 +57,28 @@ button {
 }
 </style>
 </head>
-<body>
+<body background="${APP_PATH}/static/img/login_background.jpg">
 <p>管理员账号：myfinanceweb</p>
 <p>管理员密码：myfinanceweb31415926</p>
 	<form id="form1">
 		<div class="form-group">
-			<label for="exampleInputEmail1">User Name</label> <input type="text"
-				class="form-control" name="userName" placeholder="User Name">
+			<label for="exampleInputEmail1">用户名</label> <input type="text"
+				class="form-control" name="userName" placeholder="用户名">
 		</div>
 		<div class="form-group">
-			<label for="exampleInputPassword1">Password</label> <input
+			<label for="exampleInputPassword1">密码</label> <input
 				type="password" class="form-control" name="password"
-				placeholder="Password">
+				placeholder="密码">
 		</div>
 		<div class="checkbox">
 			<label> 
 			<input type="checkbox" checked="true" name="rememberMe" value="yes">			
-			 Keep me signed in five days.
+			在这台电脑上记住我
 			</label>
 		</div>
-		<button type="button" class="btn btn-info" onclick="reset()">Cancle</button>
-		<button type="button" class="btn btn-primary" onclick="login()">Submit</button>
+		<button type="button" class="btn btn-info" onclick="reset()">取消</button>
+		<button type="button" class="btn btn-primary" onclick="login()">登录</button>
 	</form>
-	<a href="${APP_PATH}/register">sign up</a>
+	<a href="${APP_PATH}/register">注册</a>
 </body>
 </html>

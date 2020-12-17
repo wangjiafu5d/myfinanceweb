@@ -54,7 +54,7 @@ public static List<DailyData> getData(String strDate) {
 	
 	FirefoxOptions options = new FirefoxOptions().addArguments("--headless");
 	WebDriver webDriver = new FirefoxDriver(options);
-		
+//	WebDriver webDriver = new FirefoxDriver();	
 	try {
 	    String year = strDate.substring(0, 4);
 	    webDriver.get("http://www.czce.com.cn/");
