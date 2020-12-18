@@ -57,16 +57,16 @@ public class HoldingsController {
 		return "index";
 	}
 
-	@RequestMapping("/getHtml")
+	@RequestMapping("/list")
 	public String getHtml() {
-		com.chuan.myfinanceweb.utils.GetHtml.getData();
-		return "index";
+//		com.chuan.myfinanceweb.utils.GetHtml.getData();
+		return "list";
 	}
 
-	@RequestMapping("/echart2")
+	@RequestMapping("/emp")
 	public String echart2() {
 
-		return "echart2";
+		return "emp";
 	}
 
 //	@RequestMapping("/redirect")

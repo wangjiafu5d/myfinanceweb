@@ -39,7 +39,11 @@ public class LoginController {
 			if (rememberMe.equals("yes")) {				
 				cookieService.makeAndSaveCookie(response, request, userName ,password);
 			}
-			return "index";
+			if(userName.equals("myfinanceweb")) {
+				return "manage";
+			}else {				
+				return "index";
+			}
 		} else {
 			return "login";
 		}

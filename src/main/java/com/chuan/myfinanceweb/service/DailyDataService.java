@@ -33,6 +33,8 @@ public class DailyDataService {
 	DailyDataMapper dailyDataMapper;
 	@Autowired
 	DataOf100ppiMapper dataOf100ppiMapper;
+	@Autowired
+	ManageRecordService manageRecordService;
 
 	public  int insertOneData(String updateDate, String website) {
 		List<DailyData> list = new ArrayList<DailyData>();
@@ -82,6 +84,7 @@ public class DailyDataService {
 		System.out.println("list.size: " + list.size());
 		int i = 0;
 		if (list != null && list.size() > 0) {
+		manageRecordService.updateRecordTime(list.get(0).getDate());
 			for (DailyData dailyData : list) {
 				i = i + dailyDataMapper.insertSelective(dailyData);
 			}

@@ -19,8 +19,6 @@
 	rel="stylesheet" />
 <script
 	src="https://cdn.bootcss.com/twitter-bootstrap/4.2.1/js/bootstrap.min.js"></script>
-<%-- <link rel="stylesheet" href="${APP_PATH}/static/css/homepage.css" />
-<script src="${APP_PATH}/static/js/homepage.js"></script> --%>
 <script>
 function register() {
 	$.ajax({

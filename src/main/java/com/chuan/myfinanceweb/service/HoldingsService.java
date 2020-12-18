@@ -19,7 +19,10 @@ import org.springframework.stereotype.Service;
 import com.chuan.myfinanceweb.bean.Holdings;
 import com.chuan.myfinanceweb.bean.HoldingsExample;
 import com.chuan.myfinanceweb.bean.HoldingsExample.Criteria;
+import com.chuan.myfinanceweb.bean.ManageRcord;
+import com.chuan.myfinanceweb.bean.ManageRcordExample;
 import com.chuan.myfinanceweb.dao.HoldingsMapper;
+import com.chuan.myfinanceweb.dao.ManageRcordMapper;
 import com.chuan.myfinanceweb.utils.DayOffSet;
 import com.chuan.myfinanceweb.utils.HoldingsOfCzce;
 import com.chuan.myfinanceweb.utils.HoldingsOfDec;
@@ -30,6 +33,7 @@ import com.chuan.myfinanceweb.utils.IsTradeDay;
 public class HoldingsService {
 	@Autowired
 	HoldingsMapper holdingsMapper;
+	
 	
 	public List<Holdings> getByDateGoodsAndComp(Date date,String goods,String comp){
 		HoldingsExample holdsExample = new HoldingsExample();
@@ -126,6 +130,7 @@ public class HoldingsService {
 		System.out.println("list.size: " + list.size());
 		int i = 0;
 		if (list != null && list.size() > 0) {
+			
 			for (Holdings holdings : list) {
 //				System.out.println(holdings);
 //				System.out.println(list.size());
@@ -167,4 +172,5 @@ public class HoldingsService {
 		list = holdingsMapper.selectByExample(example);
 		return list;
 	}
+	
 }

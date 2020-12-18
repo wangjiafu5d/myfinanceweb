@@ -194,4 +194,6 @@
   //new Ctor().$mount('#app')
   window.vm = new Ctor().$mount('#app');
   </script>
+  
+  
 </html>
