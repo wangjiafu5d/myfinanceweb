@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.chuan.myfinanceweb.bean.DailyData;
+import com.chuan.myfinanceweb.bean.DailyDataExample;
 import com.chuan.myfinanceweb.bean.DataOf100ppi;
 import com.chuan.myfinanceweb.bean.DataOf100ppiExample;
 import com.chuan.myfinanceweb.bean.DataOf100ppiExample.Criteria;
@@ -152,10 +153,22 @@ public class DailyDataService {
 		DataOf100ppiExample example = new DataOf100ppiExample();
 		Criteria criteria = example.createCriteria();
 		try {
-			criteria.andDateBetween(sdf.parse(startDate), sdf.parse(endDate));
+			criteria.andDateBetween(sdf.parse(startDate), sdf.parse(endDate));			
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		dataOf100ppiMapper.deleteByExample(example);
+			
+		int i = dataOf100ppiMapper.deleteByExample(example);
+		
+		DailyDataExample dailyDataExample = new DailyDataExample();
+		com.chuan.myfinanceweb.bean.DailyDataExample.Criteria dailyDataCriteria = dailyDataExample.createCriteria();		
+		try {
+			dailyDataCriteria.andDateBetween(sdf.parse(startDate), sdf.parse(endDate));
+			
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		dailyDataMapper.deleteByExample(dailyDataExample);
+		System.out.println(i);
 	}
 }

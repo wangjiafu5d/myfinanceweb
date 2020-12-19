@@ -3,6 +3,8 @@ package com.chuan.myfinanceweb.controller;
 import java.sql.Date;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +23,7 @@ import com.chuan.myfinanceweb.service.CookieService;
 import com.chuan.myfinanceweb.service.HoldingsService;
 
 @Controller
-public class HoldingsController {
+public class HoldsController {
 	@Autowired
 	HoldingsService holdingsService;
 
@@ -63,10 +65,19 @@ public class HoldingsController {
 		return "list";
 	}
 
-	@RequestMapping("/emp")
-	public String echart2() {
-
-		return "emp";
+	@RequestMapping("/delivermonth")
+	@ResponseBody
+	public HashSet<String> delivermonth(@RequestParam(value = "date") String date,
+			@RequestParam(value = "website") String website,
+			@RequestParam(value = "productid") String productid) {
+		List<Holdings> list = new ArrayList<Holdings>();
+		list = holdingsService.selectHoldingsByDate(date, productid);
+		HashSet<String> delivermonthSet = new HashSet<String>();
+		for (Holdings holdings : list) {
+			delivermonthSet.add(holdings.getDelivermonth());
+		}
+		
+		return delivermonthSet;		
 	}
 
 //	@RequestMapping("/redirect")

@@ -3,7 +3,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>数据管理</title>
 <!-- 引入样式 -->
 <link rel="stylesheet"
 	href="https://unpkg.com/element-ui@2.13.2/lib/theme-chalk/index.css">
@@ -77,7 +76,7 @@ function checkdate(d1,d2){
 				url:"${APP_PATH}/manage",
 				type:"POST",
 				dataType: "json",
-				data: "start_date="+start_date+"&end_date="+end_date+"&website="+website,
+				data: "start_date="+start_date+"&&end_date="+end_date+"&&website="+website,
 				success:function(response){
 					console.log(response);
 					alert("操作成功");
@@ -97,7 +96,7 @@ function checkdate(d1,d2){
     				url:"${APP_PATH}/manage",
     				type:"POST",
     				dataType: "json",
-    				data: "_method=PUT"+"&start_date="+start_date+"&end_date="+end_date+"&website="+website,
+    				data: "_method=PUT"+"&&start_date="+start_date+"&&end_date="+end_date+"&&website="+website,
     				success:function(response){
     					console.log(response);	
     					alert("操作成功");
@@ -117,7 +116,7 @@ function checkdate(d1,d2){
     				url:"${APP_PATH}/manage",
     				type:"POST",
     				dataType: "json",
-    				data: "_method=DELETE"+"&start_date="+start_date+"&end_date="+end_date+"&website="+website,
+    				data: "_method=DELETE"+"&&start_date="+start_date+"&&end_date="+end_date+"&&website="+website,
     				success:function(response){
     					console.log(response);	
     					alert("操作成功");
@@ -471,7 +470,7 @@ function sub(){
 					url:"${APP_PATH}/manage",					
 					type:"POST",
 					dataType: "json",
-					data:"_method=DELETE"+"&start_date="+date+"&end_date="+date+"&website=全部",
+					data:"_method=DELETE"+"&&start_date="+date+"&&end_date="+date+"&&website=全部",
 					success:function(result){
 						alert(result.msg);
 						//回到本页
@@ -491,7 +490,7 @@ function sub(){
 					url:"${APP_PATH}/manage",					
 					type:"POST",
 					dataType: "json",
-					data:"_method=PUT"+"&start_date="+date+"&end_date="+date+"&website=全部",
+					data:"_method=PUT"+"&&start_date="+date+"&&end_date="+date+"&&website=全部",
 					success:function(result){
 						alert(result.msg);
 						//回到本页
@@ -541,7 +540,7 @@ function sub(){
 					url:"${APP_PATH}/manage",					
 					type:"POST",
 					dataType: "json",
-					data:"_method=DELETE"+"&start_date="+date+"&end_date="+date+"&website=全部",
+					data:"_method=DELETE"+"&&start_date="+date+"&&end_date="+date+"&&website=全部",
 					success:function(result){
 						console.log(index==(item_num - 1));
 						if(index==(item_num - 1)){
@@ -581,7 +580,7 @@ function sub(){
 					url:"${APP_PATH}/manage",					
 					type:"POST",
 					dataType: "json",
-					data:"_method=PUT"+"&start_date="+date+"&end_date="+date+"&website=全部",
+					data:"_method=PUT"+"&&start_date="+date+"&&end_date="+date+"&&website=全部",
 					success:function(result){
 						console.log(index==(item_num - 1));
 						if(index==(item_num - 1)){

@@ -38,4 +38,11 @@ public final class GetGoodsIdAndName {
 			czceId = getIdAndName("czce.properties");
 		}		
 	}
+	public static void main(String[] args) {
+		for (String key : czceId.stringPropertyNames()) {
+//		    System.out.println(key + "=" + shefId.getProperty(key));
+		    System.out.print("{ \r\n value: '"+key+"', \r\n label: '"+ czceId.getProperty(key)+"'\r\n" + 
+		    		"},");
+		}
+	}
 }

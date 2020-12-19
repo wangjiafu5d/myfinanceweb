@@ -6,7 +6,7 @@
 <meta name="generator"
 	content="HTML Tidy for HTML5 for Windows version 5.2.0" />
 <meta charset="utf-8" />
-<title>注册</title>
+<title>HiDrDeals</title>
 <meta name="googlebot" content="noarchive" />
 <%
 	pageContext.setAttribute("APP_PATH", request.getContextPath());

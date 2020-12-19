@@ -6,7 +6,7 @@
 <meta name="generator"
 	content="HTML Tidy for HTML5 for Windows version 5.2.0" />
 <meta charset="utf-8" />
-<title>注册</title>
+<title>MyFinaceWeb</title>
 <meta name="googlebot" content="noarchive" />
 <%
 	pageContext.setAttribute("APP_PATH", request.getContextPath());
@@ -19,19 +19,27 @@
 	rel="stylesheet" />
 <script
 	src="https://cdn.bootcss.com/twitter-bootstrap/4.2.1/js/bootstrap.min.js"></script>
+	<link rel="shortcut icon" href="${APP_PATH}/static/img/favicon.ico"
+	type="image/x-icon" />
 <script>
-function register() {
+function login() {
+	var isChecked = $(".checkbox input").prop("checked");
+	var rememberMe = "";
+	if(!isChecked){
+		rememberMe = "&rememberMe=no";
+	}
 	$.ajax({
-		url:"${APP_PATH}/registerToServer",
+		url:"${APP_PATH}/loginContr",
 		type:"GET",		
-		data: $('#form1').serialize(),
+		data: $('#form1').serialize()+rememberMe,
 		success:function(response){
-			console.log(response.code);
-			if(response.code==200){
-			    window.location.replace("index");
+			console.log(response);
+			if(response=="login"){
+				reset();
+				alert("用户名或者密码错误")
 			}else{
-				alert(response.extend.response);
-			}			
+			window.location.replace(response);				
+			}
 		}
 		});
 }
@@ -49,7 +57,9 @@ button {
 }
 </style>
 </head>
-<body background="${APP_PATH}/static/img/register_background.jpg">
+<body background="${APP_PATH}/static/img/login_background.jpg">
+<p>管理员账号：myfinanceweb</p>
+<p>管理员密码：myfinanceweb31415926</p>
 	<form id="form1">
 		<div class="form-group">
 			<label for="exampleInputEmail1">用户名</label> <input type="text"
@@ -60,18 +70,15 @@ button {
 				type="password" class="form-control" name="password"
 				placeholder="密码">
 		</div>
-		<div class="form-group">
-			<label for="exampleInputPassword1">邮箱</label> <input
-				type="text" class="form-control" name="email"
-				placeholder="邮箱">
+		<div class="checkbox">
+			<label> 
+			<input type="checkbox" checked="true" name="rememberMe" value="yes">			
+			在这台电脑上记住我
+			</label>
 		</div>
-		<div class="form-group">
-			<label for="exampleInputPassword1">手机号</label> <input
-				type="text" class="form-control" name="phoneNum"
-				placeholder="电话号码">
-		</div>	
 		<button type="button" class="btn btn-info" onclick="reset()">取消</button>
-		<button type="button" class="btn btn-primary" onclick="register()">提交</button>
+		<button type="button" class="btn btn-primary" onclick="login()">登录</button>
 	</form>
+	<a href="${APP_PATH}/register">注册</a>
 </body>
 </html>

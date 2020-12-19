@@ -6,7 +6,7 @@
 <meta name="generator"
 	content="HTML Tidy for HTML5 for Windows version 5.2.0" />
 <meta charset="utf-8" />
-<title>MyFinaceWeb</title>
+<title>登录</title>
 <meta name="googlebot" content="noarchive" />
 <%
 	pageContext.setAttribute("APP_PATH", request.getContextPath());
