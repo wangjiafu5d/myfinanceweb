@@ -144,14 +144,14 @@ body {
 		<template>
 			<div class="block">
 				<span class="demonstration">起始日期</span>
-				<el-date-picker v-model="value1" type="date" align="center"
-					placeholder="选择日期" value-format="yyyyMMdd"
+				<el-date-picker v-model="value1" type="date" align="center" id="start_date"
+					placeholder="选择日期" value-format="yyyy-MM-dd"
 					:picker-options="pickerOptions"> </el-date-picker>
 			</div>
 			<div class="block">
 				<span class="demonstration">结束日期</span>
-				<el-date-picker v-model="value2" type="date" align="center"
-					placeholder="选择日期" value-format="yyyyMMdd"
+				<el-date-picker v-model="value2" type="date" align="center" id ="end_date"
+					placeholder="选择日期" value-format="yyyy-MM-dd"
 					:picker-options="pickerOptions"> </el-date-picker>
 			</div>
 		</template>
@@ -279,44 +279,6 @@ var Main = {
 var Ctor = Vue.extend(Main).extend(Company);
 //new Ctor().$mount('#app')
 window.vm = new Ctor().$mount('#app');
-</script>
-	<script>
-function sub(){
-	console.log("submit");
-	console.log(Date.now());
-	console.log($("input")[0].value);
-	console.log($("input")[1].value);
-	console.log($("input")[2].value);
-	var new_comp = 
-        [{
-          value: '选1',
-          label: '黄金'
-        }, {
-          value: '选项2',
-          label: '双皮'
-        }, {
-          value: '选项3',
-          label: '蚵仔'
-        }, {
-          value: '选项4',
-          label: '龙须'
-        }, {
-          value: '选项5',
-          label: '北京'
-        }];   
-    
-  	console.log(new_comp[0].label);
-	console.log(window.vm.options[0].label);
-	//window.vm.handClick(new_comp);
-		for(var i=0; i<new_comp.length;i++){
-			window.vm.$set(window.vm.options, i, new_comp[i]);
-			
-			};
-            
-			
-    
-}
-
 </script>
 
 <script type="text/javascript">
@@ -598,7 +560,5 @@ function sub(){
 			}
 		});
 	</script>
-<style>
-</style>
 </body>
 </html>

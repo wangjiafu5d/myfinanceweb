@@ -8,8 +8,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,11 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.chuan.myfinanceweb.bean.ManageRcord;
 import com.chuan.myfinanceweb.bean.Msg;
-import com.chuan.myfinanceweb.bean.User;
-import com.chuan.myfinanceweb.service.CookieService;
 import com.chuan.myfinanceweb.service.DailyDataService;
 import com.chuan.myfinanceweb.service.HoldingsService;
-import com.chuan.myfinanceweb.service.LoginService;
 import com.chuan.myfinanceweb.service.ManageRecordService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -49,11 +44,7 @@ public class ManageController {
 	public String login() {
 		return "manage";
 	}
-	@RequestMapping("/echart")
 	
-	public String echart() {
-		return "echart";
-	}
 	
 	@RequestMapping(value="/manage",method = RequestMethod.POST)
 	@ResponseBody

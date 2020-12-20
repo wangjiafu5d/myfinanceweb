@@ -37,7 +37,7 @@ if (session != null && session.getAttribute("userName") != null) {
 
 <link rel="shortcut icon" href="${APP_PATH}/static/img/favicon.ico"
 	type="image/x-icon" />
-<script>
+<!-- <script>
 	$(document).ready(function () {
 		$("#reqbutton").click(function(){
 			$.ajax({
@@ -52,21 +52,24 @@ if (session != null && session.getAttribute("userName") != null) {
 				});
 		});
 	});
-	</script>
+	</script> -->
 <script>
         function getholds() {
         	//var date =  $("input")[0].value;
-    		var productid =  $("input")[2].value;
-    		var delivermonth =  $("input")[3].value;
+    		//var productid =  $("input")[2].value;
+    		//var delivermonth =  $("input")[4].value;
         	$.ajax({
 				url:"${APP_PATH}/holds",
 				type:"GET",
 				dataType: "json",
-				data: "date="+window.choose_date+"&"+"productid="+window.choose_productid+"&"+"delivermonth="+delivermonth,
+				data: "date="+window.choose_date+"&"+"productid="+window.choose_productid+"&"+"delivermonth="+ window.delivermonth,
 				success:function(response){
 					console.log(response[0]);				
 					
-					$("#p1").text(JSON.stringify(response));
+					for(var i=0; i<response.length;i++){
+						console.log(response[i]);				
+						window.vm.$set(window.vm.tableData, i, response[i]);						
+						};
 				}
 				});
         }
@@ -96,7 +99,8 @@ if (session != null && session.getAttribute("userName") != null) {
 			<div>
 				<p style="font-size: 30px; font-weight: bold; margin: 20px">持仓分析</p>
 			</div>
-			<form id="form1" style="margin: 0px; display: inline;"
+			
+			<form id="form1" style="margin: 10px; display: inline;"
 				onsubmit="return false" action="##" method="post">
 				<el-row :gutter="20">
 				<template>
@@ -108,30 +112,111 @@ if (session != null && session.getAttribute("userName") != null) {
 					</div>
 					</el-col>
 					<el-col :span="3">
-					<el-select v-model="value2" filterable placeholder="请选择"
+					<el-select v-model="value2" filterable placeholder="交易所"
 						id="comp_select1" @change="choose_website"> <el-option
 						v-for="item in options" :key="item.value" :label="item.label"
 						:value="item.value"> </el-option> </el-select></el-col>
 					<el-col :span="3">
-					<el-select v-model="value3" filterable placeholder="请选择"
+					<el-select v-model="value3" filterable placeholder="品种"
 						id="comp_select2" @change="choose_product"> <el-option
 						v-for="item in options2" :key="item.value" :label="item.label"
 						:value="item.value"> </el-option> </el-select></el-col>
 					<el-col :span="3">
-					<el-select v-model="value4" filterable placeholder="请选择"
+					<el-select v-model="value4" filterable placeholder="交割月"
 						id="comp_select3" @change="choose_delivermonth"> <el-option
 						v-for="item in options3" :key="item.value" :label="item.label"
 						:value="item.value"> </el-option> </el-select></el-col>
 				</template>
 				<el-col :span="2">
 				<input class="btn btn-primary" type="button" value="获取数据"
-					onclick="getholds()"> <input class="btn btn-primary"
-					type="reset" value="重置"></el-col>
-				</p>
+					onclick="getholds()"> <input class="btn btn-primary" 
+					type="reset" value="重置"><a class="btn btn-primary" 
+					href=${APP_PATH}/echart>按时间段分析</a> </el-col>				
 				</el-row>
 			</form>
 		</div>
+		<el-row :gutter="20">
+  <el-col :span="12" :offset="5">
+		<template>
+  <el-table 
+    :data="tableData" 
+    style="width: 100%"
+    :row-class-name="tableRowClassName">
+    <el-table-column
+      prop="rank"
+      label="名次"
+      width="80">
+    </el-table-column>
+    <el-table-column
+      prop="volumcomp"
+      label="会员简称"
+      width="80">
+    </el-table-column>
+    <el-table-column
+      prop="cj"
+      label="成交量"
+      width="80">
+    </el-table-column>
+    <el-table-column
+      prop="cjchg"
+      label="增减"
+      width="80">
+    </el-table-column>
+   <el-table-column
+      prop="rank"
+      label="名次"
+      width="80">
+    </el-table-column>
+    <el-table-column
+      prop="bcomp"
+      label="会员简称"
+      width="80">
+    </el-table-column>
+    <el-table-column
+      prop="buy"
+      label="多仓量"
+      width="80">
+    </el-table-column>
+    <el-table-column
+      prop="buychg"
+      label="增减"
+      width="80">
+       </el-table-column>
+      <el-table-column
+      prop="rank"
+      label="名次"
+      width="80">
+    </el-table-column>
+    <el-table-column
+      prop="scomp"
+      label="会员简称"
+      width="80">
+    </el-table-column>
+    <el-table-column
+      prop="sell"
+      label="空仓量"
+      width="80">
+    </el-table-column>
+    <el-table-column
+      prop="sellchg"
+      label="增减"
+      width="80">
+       </el-table-column>
+  </el-table>
+</template>
+</el-col>
+</el-row>
 	</div>
+	
+	<style>
+  .el-table .warning-row {
+    background: oldlace;
+  }
+
+  .el-table .success-row {
+    background: #f0f9eb;
+  }
+</style>
 </body>
 <script>
 var choose_date = '';
@@ -205,7 +290,7 @@ var choose_productid = '';
         		choose_date = date;   
         		window.choose_date = date;
         		if(choose_productid!=""){
-        			
+        			window.vm.options3 = {};
         		var website =  $("input")[2].value;
                 $.ajax({
     				url:"${APP_PATH}/delivermonth",
@@ -219,7 +304,7 @@ var choose_productid = '';
     							var item = {};
     							item['value'] = response[i];
     							item['label'] = response[i];
-    							console.log(item);
+    							//console.log(item);
     							window.vm.$set(window.vm.options3, i, item);
     							};
     					
@@ -243,6 +328,9 @@ var choose_productid = '';
 	               // console.log(opts); 
 	            	  choose_productid = productid;
 	            	  window.choose_productid = productid;
+	            	  
+	            	window.vm.options3 = {};
+	            	  //$('.comp_select3')[0].reset();
 	              if(choose_date!=''){
 	               var website =  $("input")[2].value;
 	                $.ajax({
@@ -276,8 +364,31 @@ var choose_productid = '';
 	    	  value4: '',
 	          }      
 	        },
+	        methods: {
+	        	choose_delivermonth: function(delivermonth) {
+	            	  window.delivermonth = delivermonth;             
+	    			
+	            },
+	        }
   };
-  var Ctor = Vue.extend(Main).extend(Company).extend(product).extend(deliver_month);
+  var table = {
+	    methods: {
+	      tableRowClassName({row, rowIndex}) {
+	        if (rowIndex%3 === 1) {
+	          return 'warning-row';
+	        } else if (rowIndex%3 === 0) {
+	          return 'success-row';
+	        }
+	        return '';
+	      }
+	    },
+	    data() {
+	      return {
+	        tableData: [{}]
+	      }
+	    }
+	  }
+  var Ctor = Vue.extend(Main).extend(Company).extend(product).extend(deliver_month).extend(table);
   //new Ctor().$mount('#app')
   window.vm = new Ctor().$mount('#app');
   
@@ -489,6 +600,7 @@ var choose_productid = '';
 		window.vm.$set(window.vm.options2, i, shef[i]);
 		
 		};
+		
 </script>
 
 

@@ -22,7 +22,6 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.chuan.myfinanceweb.bean.Holds;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -43,7 +42,7 @@ public class MVCtest {
 		params.add("comp", "永安期货");
 		MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/holds").params(params)).andReturn();
 		MockHttpServletRequest request = result.getRequest();
-		List<Holds> list = new ArrayList<Holds>();
+//		List<Holds> list = new ArrayList<Holds>();
 		System.out.println(request);
 //		list =  (List<Holds>) request.getAttribute("list");
 //		System.out.println(list==null);

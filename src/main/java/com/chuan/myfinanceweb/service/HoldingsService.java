@@ -187,5 +187,22 @@ public class HoldingsService {
 		list = holdingsMapper.selectByExample(example);
 		return list;
 	}
+	public List<Holdings> selectHoldingsByDate(String strDate,String endDate,String productid,String delivermonth){
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		List<Holdings> list = new ArrayList<Holdings>();
+		HoldingsExample example = new HoldingsExample();
+		Criteria criteria = example.createCriteria();
+		try {
+			criteria.andDateBetween(sdf.parse(strDate), sdf.parse(endDate));
+			criteria.andDelivermonthEqualTo(delivermonth);
+			criteria.andProductidEqualTo(productid);
+			criteria.andRankEqualTo(999);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		example.setOrderByClause("date asc");
+		list = holdingsMapper.selectByExample(example);
+		return list;
+	}
 	
 }

@@ -18,12 +18,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.chuan.myfinanceweb.bean.Holdings;
-import com.chuan.myfinanceweb.bean.Holds;
 import com.chuan.myfinanceweb.service.CookieService;
 import com.chuan.myfinanceweb.service.HoldingsService;
 
 @Controller
-public class HoldsController {
+public class HoldingsController {
 	@Autowired
 	HoldingsService holdingsService;
 
