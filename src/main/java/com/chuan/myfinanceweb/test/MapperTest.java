@@ -19,11 +19,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.chuan.myfinanceweb.bean.Dailydatasum;
 import com.chuan.myfinanceweb.bean.DailydatasumExample;
-import com.chuan.myfinanceweb.bean.Holds;
-import com.chuan.myfinanceweb.bean.HoldsExample;
-import com.chuan.myfinanceweb.bean.HoldsExample.Criteria;
-import com.chuan.myfinanceweb.dao.DailydatasumMapper;
-import com.chuan.myfinanceweb.dao.HoldsMapper;
 
 /**
  * 测试dao层的工作
@@ -38,11 +33,7 @@ import com.chuan.myfinanceweb.dao.HoldsMapper;
 @ContextConfiguration(locations={"classpath:applicationContext.xml"})
 public class MapperTest {
 	
-	@Autowired
-	DailydatasumMapper dailydatasum;
 	
-	@Autowired
-	HoldsMapper holdsMapper;
 	
 	@Autowired
 	SqlSession sqlSession;
@@ -57,9 +48,9 @@ public class MapperTest {
 //		ApplicationContext ioc = new ClassPathXmlApplicationContext("applicationContext.xml");
 //		//2、从容器中获取mapper
 //		Dailydatasum bean =(Dailydatasum) ioc.getBean("dds") ;
-//		System.out.println(bean);
-		System.out.println(dailydatasum);
-			dailydatasum.countByExample(new DailydatasumExample());
+////		System.out.println(bean);
+//		System.out.println(dailydatasum);
+//			dailydatasum.countByExample(new DailydatasumExample());
 		//1、插入几个部门
 //		departmentMapper.insertSelective(new Department(null, "开发部"));
 //		departmentMapper.insertSelective(new Department(null, "测试部"));
@@ -78,28 +69,28 @@ public class MapperTest {
 //			mapper.insertSelective(new Employee(null,uid, "M", uid+"@atguigu.com", 1));
 //		}
 //		System.out.println("批量完成");
-			HoldsExample holdsExample = new HoldsExample();
-			Criteria criteria = holdsExample.createCriteria();
-			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");			
-//			simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT+8"));
-			Date date = new Date(simpleDateFormat.parse("2019-01-09").getTime());
-			Long longTime = 1546963200000L;
-			Date date2 = new Date(longTime);
-			criteria.andDateEqualTo(date);
-			criteria.andGoodsEqualTo("hc");
-			criteria.andCompnameEqualTo("永安期货");
-			holdsExample.setOrderByClause("agreement asc");
-			List<Holds> list = new ArrayList<Holds>();
-			list = holdsMapper.selectByExample(holdsExample);
-//			list = holdsMapper.selectAll("hc","2019-01-09","永安期货");
-			System.out.println(date.getTime());
-			for (Holds holds : list) {
-				System.out.println(holds.getAgreement()+"___"+holds.getValue()+"___"+holds.getType());
-				System.out.println("date: " + simpleDateFormat.format(holds.getDate()) +"___"+holds.getDate().getTime());
-			}
-			System.out.println("++++" + list.size());
-			System.out.println(new java.util.Date());
-			System.out.println(new java.util.Date().getTime());
+//			HoldsExample holdsExample = new HoldsExample();
+//			Criteria criteria = holdsExample.createCriteria();
+//			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");			
+////			simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT+8"));
+//			Date date = new Date(simpleDateFormat.parse("2019-01-09").getTime());
+//			Long longTime = 1546963200000L;
+//			Date date2 = new Date(longTime);
+//			criteria.andDateEqualTo(date);
+//			criteria.andGoodsEqualTo("hc");
+//			criteria.andCompnameEqualTo("永安期货");
+//			holdsExample.setOrderByClause("agreement asc");
+//			List<Holds> list = new ArrayList<Holds>();
+//			list = holdsMapper.selectByExample(holdsExample);
+////			list = holdsMapper.selectAll("hc","2019-01-09","永安期货");
+//			System.out.println(date.getTime());
+//			for (Holds holds : list) {
+//				System.out.println(holds.getAgreement()+"___"+holds.getValue()+"___"+holds.getType());
+//				System.out.println("date: " + simpleDateFormat.format(holds.getDate()) +"___"+holds.getDate().getTime());
+//			}
+//			System.out.println("++++" + list.size());
+//			System.out.println(new java.util.Date());
+//			System.out.println(new java.util.Date().getTime());
 	}
 
 }

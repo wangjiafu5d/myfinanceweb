@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.chuan.myfinanceweb.dao.HoldsMapper">
-  <resultMap id="BaseResultMap" type="com.chuan.myfinanceweb.bean.Holds">
-    <result column="id" jdbcType="INTEGER" property="id" />
-    <result column="goods" jdbcType="CHAR" property="goods" />
+<mapper namespace="com.chuan.myfinanceweb.dao.ManageRcordMapper">
+  <resultMap id="BaseResultMap" type="com.chuan.myfinanceweb.bean.ManageRcord">
+    <id column="id" jdbcType="INTEGER" property="id" />
     <result column="date" jdbcType="DATE" property="date" />
-    <result column="rate" jdbcType="INTEGER" property="rate" />
-    <result column="compName" jdbcType="CHAR" property="compname" />
-    <result column="type" jdbcType="CHAR" property="type" />
-    <result column="value" jdbcType="INTEGER" property="value" />
-    <result column="increase" jdbcType="INTEGER" property="increase" />
-    <result column="agreement" jdbcType="CHAR" property="agreement" />
+    <result column="flag" jdbcType="CHAR" property="flag" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -71,16 +65,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, goods, date, rate, compName, type, value, increase, agreement
+    id, date, flag
   </sql>
-  <select id="selectAll" resultMap="BaseResultMap">SELECT * FROM Holds h where h.goods = #{goods,jdbcType=CHAR} and h.date = #{date,jdbcType=DATE} and compname = #{comp}</select>
-  <select id="selectByExample" parameterType="com.chuan.myfinanceweb.bean.HoldsExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.chuan.myfinanceweb.bean.ManageRcordExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from holds
+    from manage_record
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -88,116 +81,68 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.chuan.myfinanceweb.bean.HoldsExample">
-    delete from holds
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from manage_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from manage_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.chuan.myfinanceweb.bean.ManageRcordExample">
+    delete from manage_record
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.chuan.myfinanceweb.bean.Holds">
-    insert into holds (id, goods, date, rate, 
-      compName, type, value, increase, 
-      agreement)
-    values (#{id,jdbcType=INTEGER}, #{goods,jdbcType=CHAR}, #{date,jdbcType=DATE}, #{rate,jdbcType=INTEGER}, 
-      #{compname,jdbcType=CHAR}, #{type,jdbcType=CHAR}, #{value,jdbcType=INTEGER}, #{increase,jdbcType=INTEGER}, 
-      #{agreement,jdbcType=CHAR})
+  <insert id="insert" parameterType="com.chuan.myfinanceweb.bean.ManageRcord">
+    insert into manage_record (id, date, flag)
+    values (#{id,jdbcType=INTEGER}, #{date,jdbcType=DATE}, #{flag,jdbcType=CHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.chuan.myfinanceweb.bean.Holds">
-    insert into holds
+  <insert id="insertSelective" parameterType="com.chuan.myfinanceweb.bean.ManageRcord">
+    insert into manage_record
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="goods != null">
-        goods,
-      </if>
       <if test="date != null">
         date,
       </if>
-      <if test="rate != null">
-        rate,
-      </if>
-      <if test="compname != null">
-        compName,
-      </if>
-      <if test="type != null">
-        type,
-      </if>
-      <if test="value != null">
-        value,
-      </if>
-      <if test="increase != null">
-        increase,
-      </if>
-      <if test="agreement != null">
-        agreement,
+      <if test="flag != null">
+        flag,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="goods != null">
-        #{goods,jdbcType=CHAR},
-      </if>
       <if test="date != null">
         #{date,jdbcType=DATE},
       </if>
-      <if test="rate != null">
-        #{rate,jdbcType=INTEGER},
-      </if>
-      <if test="compname != null">
-        #{compname,jdbcType=CHAR},
-      </if>
-      <if test="type != null">
-        #{type,jdbcType=CHAR},
-      </if>
-      <if test="value != null">
-        #{value,jdbcType=INTEGER},
-      </if>
-      <if test="increase != null">
-        #{increase,jdbcType=INTEGER},
-      </if>
-      <if test="agreement != null">
-        #{agreement,jdbcType=CHAR},
+      <if test="flag != null">
+        #{flag,jdbcType=CHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.chuan.myfinanceweb.bean.HoldsExample" resultType="java.lang.Long">
-    select count(*) from holds
+  <select id="countByExample" parameterType="com.chuan.myfinanceweb.bean.ManageRcordExample" resultType="java.lang.Long">
+    select count(*) from manage_record
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update holds
+    update manage_record
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.goods != null">
-        goods = #{record.goods,jdbcType=CHAR},
-      </if>
       <if test="record.date != null">
         date = #{record.date,jdbcType=DATE},
       </if>
-      <if test="record.rate != null">
-        rate = #{record.rate,jdbcType=INTEGER},
-      </if>
-      <if test="record.compname != null">
-        compName = #{record.compname,jdbcType=CHAR},
-      </if>
-      <if test="record.type != null">
-        type = #{record.type,jdbcType=CHAR},
-      </if>
-      <if test="record.value != null">
-        value = #{record.value,jdbcType=INTEGER},
-      </if>
-      <if test="record.increase != null">
-        increase = #{record.increase,jdbcType=INTEGER},
-      </if>
-      <if test="record.agreement != null">
-        agreement = #{record.agreement,jdbcType=CHAR},
+      <if test="record.flag != null">
+        flag = #{record.flag,jdbcType=CHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -205,18 +150,30 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update holds
+    update manage_record
     set id = #{record.id,jdbcType=INTEGER},
-      goods = #{record.goods,jdbcType=CHAR},
       date = #{record.date,jdbcType=DATE},
-      rate = #{record.rate,jdbcType=INTEGER},
-      compName = #{record.compname,jdbcType=CHAR},
-      type = #{record.type,jdbcType=CHAR},
-      value = #{record.value,jdbcType=INTEGER},
-      increase = #{record.increase,jdbcType=INTEGER},
-      agreement = #{record.agreement,jdbcType=CHAR}
+      flag = #{record.flag,jdbcType=CHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chuan.myfinanceweb.bean.ManageRcord">
+    update manage_record
+    <set>
+      <if test="date != null">
+        date = #{date,jdbcType=DATE},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chuan.myfinanceweb.bean.ManageRcord">
+    update manage_record
+    set date = #{date,jdbcType=DATE},
+      flag = #{flag,jdbcType=CHAR}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chuan.myfinanceweb.dao.DataOf100ppiMapper">
+  <resultMap id="BaseResultMap" type="com.chuan.myfinanceweb.bean.DataOf100ppi">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="productid" jdbcType="CHAR" property="productid" />
+    <result column="productname" jdbcType="CHAR" property="productname" />
+    <result column="currentprice" jdbcType="DECIMAL" property="currentprice" />
+    <result column="delivermonth1" jdbcType="CHAR" property="delivermonth1" />
+    <result column="settlementprice1" jdbcType="DECIMAL" property="settlementprice1" />
+    <result column="jc1" jdbcType="DECIMAL" property="jc1" />
+    <result column="percent1" jdbcType="DECIMAL" property="percent1" />
+    <result column="delivermonth2" jdbcType="CHAR" property="delivermonth2" />
+    <result column="settlementprice2" jdbcType="DECIMAL" property="settlementprice2" />
+    <result column="jc2" jdbcType="DECIMAL" property="jc2" />
+    <result column="percent2" jdbcType="DECIMAL" property="percent2" />
+    <result column="date" jdbcType="DATE" property="date" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, productid, productname, currentprice, delivermonth1, settlementprice1, jc1, percent1, 
+    delivermonth2, settlementprice2, jc2, percent2, date
+  </sql>
+  <select id="selectByExample" parameterType="com.chuan.myfinanceweb.bean.DataOf100ppiExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from dataof100ppi
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dataof100ppi
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dataof100ppi
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.chuan.myfinanceweb.bean.DataOf100ppiExample">
+    delete from dataof100ppi
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.chuan.myfinanceweb.bean.DataOf100ppi">
+    insert into dataof100ppi (id, productid, productname, 
+      currentprice, delivermonth1, settlementprice1, 
+      jc1, percent1, delivermonth2, 
+      settlementprice2, jc2, percent2, 
+      date)
+    values (#{id,jdbcType=INTEGER}, #{productid,jdbcType=CHAR}, #{productname,jdbcType=CHAR}, 
+      #{currentprice,jdbcType=DECIMAL}, #{delivermonth1,jdbcType=CHAR}, #{settlementprice1,jdbcType=DECIMAL}, 
+      #{jc1,jdbcType=DECIMAL}, #{percent1,jdbcType=DECIMAL}, #{delivermonth2,jdbcType=CHAR}, 
+      #{settlementprice2,jdbcType=DECIMAL}, #{jc2,jdbcType=DECIMAL}, #{percent2,jdbcType=DECIMAL}, 
+      #{date,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.chuan.myfinanceweb.bean.DataOf100ppi">
+    insert into dataof100ppi
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="productid != null">
+        productid,
+      </if>
+      <if test="productname != null">
+        productname,
+      </if>
+      <if test="currentprice != null">
+        currentprice,
+      </if>
+      <if test="delivermonth1 != null">
+        delivermonth1,
+      </if>
+      <if test="settlementprice1 != null">
+        settlementprice1,
+      </if>
+      <if test="jc1 != null">
+        jc1,
+      </if>
+      <if test="percent1 != null">
+        percent1,
+      </if>
+      <if test="delivermonth2 != null">
+        delivermonth2,
+      </if>
+      <if test="settlementprice2 != null">
+        settlementprice2,
+      </if>
+      <if test="jc2 != null">
+        jc2,
+      </if>
+      <if test="percent2 != null">
+        percent2,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="productid != null">
+        #{productid,jdbcType=CHAR},
+      </if>
+      <if test="productname != null">
+        #{productname,jdbcType=CHAR},
+      </if>
+      <if test="currentprice != null">
+        #{currentprice,jdbcType=DECIMAL},
+      </if>
+      <if test="delivermonth1 != null">
+        #{delivermonth1,jdbcType=CHAR},
+      </if>
+      <if test="settlementprice1 != null">
+        #{settlementprice1,jdbcType=DECIMAL},
+      </if>
+      <if test="jc1 != null">
+        #{jc1,jdbcType=DECIMAL},
+      </if>
+      <if test="percent1 != null">
+        #{percent1,jdbcType=DECIMAL},
+      </if>
+      <if test="delivermonth2 != null">
+        #{delivermonth2,jdbcType=CHAR},
+      </if>
+      <if test="settlementprice2 != null">
+        #{settlementprice2,jdbcType=DECIMAL},
+      </if>
+      <if test="jc2 != null">
+        #{jc2,jdbcType=DECIMAL},
+      </if>
+      <if test="percent2 != null">
+        #{percent2,jdbcType=DECIMAL},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.chuan.myfinanceweb.bean.DataOf100ppiExample" resultType="java.lang.Long">
+    select count(*) from dataof100ppi
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update dataof100ppi
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.productid != null">
+        productid = #{record.productid,jdbcType=CHAR},
+      </if>
+      <if test="record.productname != null">
+        productname = #{record.productname,jdbcType=CHAR},
+      </if>
+      <if test="record.currentprice != null">
+        currentprice = #{record.currentprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.delivermonth1 != null">
+        delivermonth1 = #{record.delivermonth1,jdbcType=CHAR},
+      </if>
+      <if test="record.settlementprice1 != null">
+        settlementprice1 = #{record.settlementprice1,jdbcType=DECIMAL},
+      </if>
+      <if test="record.jc1 != null">
+        jc1 = #{record.jc1,jdbcType=DECIMAL},
+      </if>
+      <if test="record.percent1 != null">
+        percent1 = #{record.percent1,jdbcType=DECIMAL},
+      </if>
+      <if test="record.delivermonth2 != null">
+        delivermonth2 = #{record.delivermonth2,jdbcType=CHAR},
+      </if>
+      <if test="record.settlementprice2 != null">
+        settlementprice2 = #{record.settlementprice2,jdbcType=DECIMAL},
+      </if>
+      <if test="record.jc2 != null">
+        jc2 = #{record.jc2,jdbcType=DECIMAL},
+      </if>
+      <if test="record.percent2 != null">
+        percent2 = #{record.percent2,jdbcType=DECIMAL},
+      </if>
+      <if test="record.date != null">
+        date = #{record.date,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update dataof100ppi
+    set id = #{record.id,jdbcType=INTEGER},
+      productid = #{record.productid,jdbcType=CHAR},
+      productname = #{record.productname,jdbcType=CHAR},
+      currentprice = #{record.currentprice,jdbcType=DECIMAL},
+      delivermonth1 = #{record.delivermonth1,jdbcType=CHAR},
+      settlementprice1 = #{record.settlementprice1,jdbcType=DECIMAL},
+      jc1 = #{record.jc1,jdbcType=DECIMAL},
+      percent1 = #{record.percent1,jdbcType=DECIMAL},
+      delivermonth2 = #{record.delivermonth2,jdbcType=CHAR},
+      settlementprice2 = #{record.settlementprice2,jdbcType=DECIMAL},
+      jc2 = #{record.jc2,jdbcType=DECIMAL},
+      percent2 = #{record.percent2,jdbcType=DECIMAL},
+      date = #{record.date,jdbcType=DATE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chuan.myfinanceweb.bean.DataOf100ppi">
+    update dataof100ppi
+    <set>
+      <if test="productid != null">
+        productid = #{productid,jdbcType=CHAR},
+      </if>
+      <if test="productname != null">
+        productname = #{productname,jdbcType=CHAR},
+      </if>
+      <if test="currentprice != null">
+        currentprice = #{currentprice,jdbcType=DECIMAL},
+      </if>
+      <if test="delivermonth1 != null">
+        delivermonth1 = #{delivermonth1,jdbcType=CHAR},
+      </if>
+      <if test="settlementprice1 != null">
+        settlementprice1 = #{settlementprice1,jdbcType=DECIMAL},
+      </if>
+      <if test="jc1 != null">
+        jc1 = #{jc1,jdbcType=DECIMAL},
+      </if>
+      <if test="percent1 != null">
+        percent1 = #{percent1,jdbcType=DECIMAL},
+      </if>
+      <if test="delivermonth2 != null">
+        delivermonth2 = #{delivermonth2,jdbcType=CHAR},
+      </if>
+      <if test="settlementprice2 != null">
+        settlementprice2 = #{settlementprice2,jdbcType=DECIMAL},
+      </if>
+      <if test="jc2 != null">
+        jc2 = #{jc2,jdbcType=DECIMAL},
+      </if>
+      <if test="percent2 != null">
+        percent2 = #{percent2,jdbcType=DECIMAL},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chuan.myfinanceweb.bean.DataOf100ppi">
+    update dataof100ppi
+    set productid = #{productid,jdbcType=CHAR},
+      productname = #{productname,jdbcType=CHAR},
+      currentprice = #{currentprice,jdbcType=DECIMAL},
+      delivermonth1 = #{delivermonth1,jdbcType=CHAR},
+      settlementprice1 = #{settlementprice1,jdbcType=DECIMAL},
+      jc1 = #{jc1,jdbcType=DECIMAL},
+      percent1 = #{percent1,jdbcType=DECIMAL},
+      delivermonth2 = #{delivermonth2,jdbcType=CHAR},
+      settlementprice2 = #{settlementprice2,jdbcType=DECIMAL},
+      jc2 = #{jc2,jdbcType=DECIMAL},
+      percent2 = #{percent2,jdbcType=DECIMAL},
+      date = #{date,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
