@@ -33,7 +33,7 @@
 	type="image/x-icon" />
 	
 </head>
-<body>
+<body background="${APP_PATH}/static/img/echart_background.jpg">
 <div id="app">
 
 		<el-row type="flex" justify="end" style="margin: 20px 0px 0px 0px">
@@ -53,7 +53,7 @@
 					</div>
 					</el-col>
 					<el-col :span="3"><div class="block">
-						<el-date-picker v-model="value5" type="date" placeholder="开始日期"  @change="get_end_date" 
+						<el-date-picker v-model="value5" type="date" placeholder="结束日期"  @change="get_end_date" 
 							value-format="yyyy-MM-dd" :picker-options="pickerOptions2">
 						</el-date-picker>
 					</div>
