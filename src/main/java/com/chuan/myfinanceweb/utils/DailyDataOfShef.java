@@ -21,7 +21,7 @@ import com.google.gson.JsonObject;
 
 public class DailyDataOfShef {
 	public static void main(String[] args) {
-		getData("20200903");
+		getData("2020-01-02");
 	}
 	public static List<DailyData> getData(String strDate) {
 		List<DailyData> list = new ArrayList<DailyData>();
@@ -62,8 +62,8 @@ public class DailyDataOfShef {
 			if (delivermonth.equals("小计")||productid.equals("总计")||productid.trim().equals("sc_tas")) {
 				continue ;
 			} 
-			
-			dailyData.setProductid(data.getAsJsonPrimitive("PRODUCTGROUPID").getAsString());
+			//System.out.println(data);
+			dailyData.setProductid(data.getAsJsonPrimitive("PRODUCTID").getAsString().substring(0,2));
 			dailyData.setProductname(data.getAsJsonPrimitive("PRODUCTNAME").getAsString());
 			dailyData.setPresettlementprice(new BigDecimal(IsBlank.stringIsBlank(data.getAsJsonPrimitive("PRESETTLEMENTPRICE").getAsString())));
 			dailyData.setOpenprice(new BigDecimal(IsBlank.stringIsBlank(data.getAsJsonPrimitive("OPENPRICE").getAsString())));
@@ -86,9 +86,9 @@ public class DailyDataOfShef {
 			map.put(dailyData.getProductid(), dailyData.getProductname());
 		};
 //		System.out.println(list.size());
-		for(String key : map.keySet()) {
-			System.out.println(map.get(key)+"="+key);
-		}
+//		for(String key : map.keySet()) {
+//			System.out.println(map.get(key)+"="+key);
+//		}
 		return list;
 	}
 }
