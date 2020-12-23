@@ -54,7 +54,7 @@ public class HoldingsOfShef {
 			JsonObject data = ele.getAsJsonObject();
 			Holdings holdings = null;
 			
-		     
+		    //System.out.println(data);
 			Integer rank = Integer.valueOf(data.getAsJsonPrimitive("RANK").getAsString());
 			if(rank>0){
 				String instrumentid = data.getAsJsonPrimitive("INSTRUMENTID").getAsString();
@@ -65,10 +65,10 @@ public class HoldingsOfShef {
 				Integer cjchg = Integer.valueOf(IsBlank.stringIsBlank(data.getAsJsonPrimitive("CJ1_CHG").getAsString()));
 				String bcomp = data.getAsJsonPrimitive("PARTICIPANTABBR2").getAsString();
 				Integer buy = Integer.valueOf(IsBlank.stringIsBlank(data.getAsJsonPrimitive("CJ2").getAsString()));
-				Integer buychg = Integer.valueOf(IsBlank.stringIsBlank(data.getAsJsonPrimitive("CJ2").getAsString()));
+				Integer buychg = Integer.valueOf(IsBlank.stringIsBlank(data.getAsJsonPrimitive("CJ2_CHG").getAsString()));
 				String scomp = data.getAsJsonPrimitive("PARTICIPANTABBR3").getAsString();
 				Integer sell = Integer.valueOf(IsBlank.stringIsBlank(data.getAsJsonPrimitive("CJ3").getAsString()));
-				Integer sellchg =Integer.valueOf(IsBlank.stringIsBlank(data.getAsJsonPrimitive("CJ3").getAsString()));
+				Integer sellchg =Integer.valueOf(IsBlank.stringIsBlank(data.getAsJsonPrimitive("CJ3_CHG").getAsString()));
 				if (rank.compareTo(Integer.valueOf(999))==0) {
 					volumcomp = "total";
 					bcomp = "total";

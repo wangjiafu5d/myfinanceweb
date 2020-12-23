@@ -24,7 +24,7 @@ import com.chuan.myfinanceweb.bean.Holdings;
 public class HoldingsOfDec {
 	public static void main(String[] args) {
 		long start = System.currentTimeMillis();
-		getData("2020-12-01");
+		getData("2020-07-01");
 		System.out.println(System.currentTimeMillis() - start);
 	}
 
@@ -107,7 +107,7 @@ public class HoldingsOfDec {
 		for (List<Holdings> list2 : vector2) {
 			list.addAll(list2);
 		}
-
+//		System.out.println(list.size());
 		return list;
 	}
 
@@ -198,6 +198,7 @@ public class HoldingsOfDec {
 			e.printStackTrace();
 		}
 		Element dataArea = doc.getElementsByClass("dataArea").first();
+//		System.out.println(dataArea);
 		return dataArea;
 	}
 }
