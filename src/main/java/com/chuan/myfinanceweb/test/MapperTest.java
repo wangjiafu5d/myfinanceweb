@@ -17,8 +17,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.chuan.myfinanceweb.bean.Dailydatasum;
-import com.chuan.myfinanceweb.bean.DailydatasumExample;
 
 /**
  * 测试dao层的工作

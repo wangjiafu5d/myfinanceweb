@@ -45,7 +45,7 @@ public class HoldingsService {
 		return holdingsMapper.selectByExample(holdsExample);
 	}
 	public void insertHoldings(String startDate, String endDate, String website) {
-		ExecutorService exec = Executors.newFixedThreadPool(10);
+		ExecutorService exec = Executors.newSingleThreadExecutor();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date sDate = null;
 		Date eDate = null;
@@ -66,7 +66,7 @@ public class HoldingsService {
 
 			String updateDate = sdf.format(cal.getTime());
 			if (IsTradeDay.checkDate(updateDate)) {
-				System.out.println(updateDate);
+				//System.out.println(updateDate);
 				exec.execute(() -> {
 					insertOneData(updateDate, website);
 					latch.countDown();
@@ -90,44 +90,7 @@ public class HoldingsService {
 	}
 	public  int insertOneData(String updateDate, String website) {
 		List<Holdings> list = new ArrayList<Holdings>();
-		Vector<List<Holdings>> vector = new Vector<List<Holdings>>();
-		int times = 1;
-		if(website.equals("全部")) {
-			times = 3;
-		}
-		CountDownLatch latch = new CountDownLatch(times);
-		ExecutorService exec = Executors.newFixedThreadPool(10);
-		
-			if (website.equals("全部") || website.equals("上交所")) {
-				exec.execute(() -> {
-					vector.add(HoldingsOfShef.getData(updateDate));
-					System.out.println("上交所");
-					latch.countDown();
-				});
-			}
-			if (website.equals("全部") || website.equals("大商所")) {
-				exec.execute(() -> {
-					vector.add(HoldingsOfDec.getData(updateDate));
-					latch.countDown();
-				});
-			}
-			if (website.equals("全部") || website.equals("郑商所")) {
-				exec.execute(() -> {
-					vector.add(HoldingsOfCzce.getData(updateDate));
-					latch.countDown();
-				});
-			}			
-		
-		try {
-			latch.await();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-
-		for (List<Holdings> list2 : vector) {
-			list.addAll(list2);
-		}
-		System.out.println("list.size: " + list.size());
+		list = getOneDayList(updateDate, website);
 		int i = 0;
 		if (list != null && list.size() > 0) {
 			
@@ -140,8 +103,6 @@ public class HoldingsService {
 				i = i + holdingsMapper.insertSelective(holdings);
 			}
 		}
-
-		exec.shutdown();
 		return i;
 	}
 	public void deleteHoldings(String startDate, String endDate, String website) {
@@ -187,6 +148,20 @@ public class HoldingsService {
 		list = holdingsMapper.selectByExample(example);
 		return list;
 	}
+	public List<Holdings> selectHoldingsByDate2(String strDate,String endDate){
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		List<Holdings> list = new ArrayList<Holdings>();
+		HoldingsExample example = new HoldingsExample();
+		Criteria criteria = example.createCriteria();
+		try {
+			criteria.andDateBetween(sdf.parse(strDate), sdf.parse(endDate));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		example.setOrderByClause("_rank asc");
+		list = holdingsMapper.selectByExample(example);
+		return list;
+	}
 	public List<Holdings> selectHoldingsByDate(String strDate,String endDate,String productid,String delivermonth){
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		List<Holdings> list = new ArrayList<Holdings>();
@@ -205,4 +180,113 @@ public class HoldingsService {
 		return list;
 	}
 	
+	public int updateOneDayHoldings(String updateDate, String website) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		List<Holdings> list = new ArrayList<Holdings>();
+		list = getOneDayList(updateDate, website);		
+		int i = 0;
+		if (list != null && list.size() > 0) {
+			for (Holdings holdings : list) {
+				HoldingsExample example = new HoldingsExample();
+				Criteria criteria = example.createCriteria();
+				try {
+					criteria.andDateEqualTo(sdf.parse(updateDate));
+					criteria.andProductidEqualTo(holdings.getProductid());
+					criteria.andDelivermonthEqualTo(holdings.getDelivermonth());
+					criteria.andRankEqualTo(holdings.getRank());
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				i = i + holdingsMapper.updateByExampleSelective(holdings, example);
+			}
+		}
+
+		
+		return i;
+	}
+	public void updateHoldings(String startDate, String endDate, String website) {
+		ExecutorService exec = Executors.newSingleThreadExecutor();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date sDate = null;
+		Date eDate = null;
+		try {
+			sDate = sdf.parse(startDate);
+			eDate = sdf.parse(endDate);
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(sDate);
+		
+		int days = DayOffSet.js(sDate, eDate)+1;
+		CountDownLatch latch = new CountDownLatch(days);
+		for (int i = 0; i < days; i++) 
+		 {
+			
+
+			String updateDate = sdf.format(cal.getTime());
+			if (IsTradeDay.checkDate(updateDate)) {				
+				exec.execute(() -> {
+					updateOneDayHoldings(updateDate, website);
+					latch.countDown();
+				});
+			}else {
+				exec.execute(() -> {					
+					latch.countDown();
+				});
+			}
+
+			cal.add(Calendar.DAY_OF_MONTH, 1);
+			System.out.println(cal.getTime());
+		}
+		try {
+			latch.await();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		exec.shutdown();
+		
+	}
+	public List<Holdings> getOneDayList(String updateDate, String website){
+		List<Holdings> list = new ArrayList<Holdings>();
+		Vector<List<Holdings>> vector = new Vector<List<Holdings>>();
+		int times = 1;
+		if(website.equals("全部")) {
+			times = 3;
+		}
+		CountDownLatch latch = new CountDownLatch(times);
+		ExecutorService exec = Executors.newFixedThreadPool(3);
+		
+			if (website.equals("全部") || website.equals("上交所")) {
+				exec.execute(() -> {
+					vector.add(HoldingsOfShef.getData(updateDate));
+					//System.out.println("上交所");
+					latch.countDown();
+				});
+			}
+			if (website.equals("全部") || website.equals("大商所")) {
+				exec.execute(() -> {
+					vector.add(HoldingsOfDec.getData(updateDate));
+					latch.countDown();
+				});
+			}
+			if (website.equals("全部") || website.equals("郑商所")) {
+				exec.execute(() -> {
+					vector.add(HoldingsOfCzce.getData(updateDate));
+					latch.countDown();
+				});
+			}			
+		
+		try {
+			latch.await();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		for (List<Holdings> list2 : vector) {
+			list.addAll(list2);
+		}
+		exec.shutdown();
+		return list;
+	}
 }

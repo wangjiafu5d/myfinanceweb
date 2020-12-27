@@ -15,17 +15,14 @@ D:\code\workspace\myfinanceweb\src\main\java\com\chuan\myfinanceweb\test\MapperT
 D:\code\workspace\myfinanceweb\src\main\java\com\chuan\myfinanceweb\utils\GetHtml.java
 D:\code\workspace\myfinanceweb\src\main\java\com\chuan\myfinanceweb\utils\HoldingsOfDec.java
 D:\code\workspace\myfinanceweb\src\main\java\com\chuan\myfinanceweb\utils\UserCookieUtils.java
-D:\code\workspace\myfinanceweb\src\main\java\com\chuan\myfinanceweb\dao\DailydatasumMapper.java
 D:\code\workspace\myfinanceweb\src\main\java\com\chuan\myfinanceweb\service\CookieService.java
 D:\code\workspace\myfinanceweb\src\main\java\com\chuan\myfinanceweb\controller\AnalyseController.java
 D:\code\workspace\myfinanceweb\src\main\java\com\chuan\myfinanceweb\dao\ManageRcordMapper.java
 D:\code\workspace\myfinanceweb\src\main\java\com\chuan\myfinanceweb\bean\DailyDataExample.java
 D:\code\workspace\myfinanceweb\src\main\java\com\chuan\myfinanceweb\utils\DataUtil.java
-D:\code\workspace\myfinanceweb\src\main\java\com\chuan\myfinanceweb\bean\DailydatasumExample.java
 D:\code\workspace\myfinanceweb\src\main\java\com\chuan\myfinanceweb\utils\DailyDataOfCzce.java
 D:\code\workspace\myfinanceweb\src\main\java\com\chuan\myfinanceweb\utils\GetGoodsIdAndName.java
 D:\code\workspace\myfinanceweb\src\main\java\com\chuan\myfinanceweb\bean\ManageRcordExample.java
-D:\code\workspace\myfinanceweb\src\main\java\com\chuan\myfinanceweb\bean\Dailydatasum.java
 D:\code\workspace\myfinanceweb\src\main\java\com\chuan\myfinanceweb\utils\DailyDataOf100ppi.java
 D:\code\workspace\myfinanceweb\src\main\java\com\chuan\myfinanceweb\utils\HoldingsOfCzce.java
 D:\code\workspace\myfinanceweb\src\main\java\com\chuan\myfinanceweb\interceptor\LoginInterceptor.java

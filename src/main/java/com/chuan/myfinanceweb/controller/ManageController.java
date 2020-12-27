@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.chuan.myfinanceweb.bean.DailyData;
+import com.chuan.myfinanceweb.bean.Holdings;
 import com.chuan.myfinanceweb.bean.ManageRcord;
 import com.chuan.myfinanceweb.bean.Msg;
 import com.chuan.myfinanceweb.service.DailyDataService;
@@ -24,73 +26,99 @@ import com.chuan.myfinanceweb.service.ManageRecordService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
-
-
 @Controller
 public class ManageController {
-	
+
 	@Autowired
 	DailyDataService dailyDataService;
-	
+
 	@Autowired
 	HoldingsService holdingservice;
-	
 
 	@Autowired
 	ManageRecordService manageRecordService;
-	
+
 	@RequestMapping("/manage")
-	
+
 	public String login() {
 		return "manage";
 	}
-	
-	
-	@RequestMapping(value="/manage",method = RequestMethod.POST)
+
+	@RequestMapping(value = "/manage", method = RequestMethod.POST)
 	@ResponseBody
-	public Msg insert(@RequestParam(value="start_date") String startDate,@RequestParam(value="end_date")String endDate,@RequestParam(value="website")String website) throws ParseException {
-		System.out.println(startDate+endDate+website);
+	public Msg insert(@RequestParam(value = "start_date") String startDate,
+			@RequestParam(value = "end_date") String endDate, @RequestParam(value = "website") String website)
+			throws ParseException {
+		System.out.println(startDate + endDate + website);
 		ExecutorService executor = Executors.newSingleThreadExecutor();
-	    executor.submit(()->{dailyDataService.deleteDailyData(startDate, endDate, website);});
-	    executor.submit(()->{holdingservice.deleteHoldings(startDate, endDate, website);});
-	    executor.submit(()->{dailyDataService.insertDailyData(startDate, endDate, website);});
-	    executor.submit(()->{holdingservice.insertHoldings(startDate, endDate, website);});
-	    executor.shutdown();
-		
-		
-		
-		
+		List<Holdings> holdingsList = holdingservice.selectHoldingsByDate2(startDate, endDate);
+		if (holdingsList == null || holdingsList.size() == 0) {
+			executor.submit(() -> {
+				holdingservice.insertHoldings(startDate, endDate, website);
+			});
+		}
+		List<DailyData> dailydataList = dailyDataService.selectDaiyData(startDate, endDate);
+		if (dailydataList == null || dailydataList.size() == 0) {
+			executor.submit(() -> {
+				dailyDataService.insertDailyData(startDate, endDate, website);
+			});
+		}
+		executor.shutdown();
 		Msg msg = new Msg();
 		msg.setMsg("insert");
 		return msg;
 	}
-	@RequestMapping(value="/manage",method = RequestMethod.DELETE)
+
+	@RequestMapping(value = "/manage", method = RequestMethod.DELETE)
 	@ResponseBody
-	public Msg delete(@RequestParam(value="start_date") String startDate,@RequestParam(value="end_date")String endDate,@RequestParam(value="website")String website) throws ParseException {
-		System.out.println(startDate+endDate+website);
+	public Msg delete(@RequestParam(value = "start_date") String startDate,
+			@RequestParam(value = "end_date") String endDate, @RequestParam(value = "website") String website)
+			throws ParseException {
+		System.out.println(startDate + endDate + website);
 		ExecutorService executor = Executors.newSingleThreadExecutor();
-	    executor.submit(()->{dailyDataService.deleteDailyData(startDate, endDate, website);});
-	    executor.submit(()->{holdingservice.deleteHoldings(startDate, endDate, website);});	
-	    executor.submit(()->{manageRecordService.deleteRecord(startDate, endDate);});
-	    executor.shutdown();
+		executor.submit(() -> {
+			dailyDataService.deleteDailyData(startDate, endDate, website);
+		});
+		executor.submit(() -> {
+			holdingservice.deleteHoldings(startDate, endDate, website);
+		});
+		executor.submit(() -> {
+			manageRecordService.deleteRecord(startDate, endDate);
+		});
+		executor.shutdown();
 		Msg msg = new Msg();
 		msg.setMsg("delete");
 		return msg;
 	}
-	@RequestMapping(value="/manage",method = RequestMethod.PUT)
+
+	@SuppressWarnings("null")
+	@RequestMapping(value = "/manage", method = RequestMethod.PUT)
 	@ResponseBody
-	public Msg update(@RequestParam(value="start_date") String startDate,@RequestParam(value="end_date")String endDate,@RequestParam(value="website")String website) throws ParseException {
-		System.out.println(startDate+endDate+website);
+	public Msg update(@RequestParam(value = "start_date") String startDate,
+			@RequestParam(value = "end_date") String endDate, @RequestParam(value = "website") String website)
+			throws ParseException {
+		System.out.println(startDate + endDate + website);
+		List<Holdings> holdingsList = holdingservice.selectHoldingsByDate2(startDate, endDate);
 		ExecutorService executor = Executors.newSingleThreadExecutor();
-	    executor.submit(()->{dailyDataService.deleteDailyData(startDate, endDate, website);});
-	    executor.submit(()->{holdingservice.deleteHoldings(startDate, endDate, website);});
-	    executor.submit(()->{dailyDataService.insertDailyData(startDate, endDate, website);});
-	    executor.submit(()->{holdingservice.insertHoldings(startDate, endDate, website);});	  
-	    executor.shutdown();
+		if (holdingsList != null && holdingsList.size() != 0) {
+
+			executor.submit(() -> {
+				holdingservice.updateHoldings(startDate, endDate, website);
+			});
+		}
+		List<DailyData> dailydataList = dailyDataService.selectDaiyData(startDate, endDate);
+		if (dailydataList != null && dailydataList.size() != 0) {
+
+			executor.submit(() -> {
+				dailyDataService.updateDailyData(startDate, endDate, website);
+			});
+		}
+		executor.shutdown();
 		Msg msg = new Msg();
 		msg.setMsg("update");
 		return msg;
 	}
+
 	@RequestMapping("/record")
 	@ResponseBody
 	public Msg record(@RequestParam(value = "pn", defaultValue = "1") Integer pn, HttpServletRequest request) {

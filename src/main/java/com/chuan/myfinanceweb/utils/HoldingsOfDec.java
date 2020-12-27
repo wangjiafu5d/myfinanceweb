@@ -24,7 +24,7 @@ import com.chuan.myfinanceweb.bean.Holdings;
 public class HoldingsOfDec {
 	public static void main(String[] args) {
 		long start = System.currentTimeMillis();
-		getData("2020-07-01");
+		getData("2020-11-06");
 		System.out.println(System.currentTimeMillis() - start);
 	}
 
@@ -60,6 +60,12 @@ public class HoldingsOfDec {
 //		Element dataArea = doc.getElementsByClass("dataArea").first();
 		Elements productNames = doc.getElementsByClass("keyWord_100");
 //		System.out.println(productNames.get(0).text());
+		if(productNames==null) {
+			System.out.println("dec Holodngs更新失败：" + strDate);
+			System.out.println(doc);
+			return list;
+			
+		}
 		Vector<List<String>> vector1 = new Vector<List<String>>();
 		CountDownLatch latch = new CountDownLatch(productNames.size());
 		List<String> delivermonthList = new ArrayList<String>();
@@ -123,25 +129,25 @@ public class HoldingsOfDec {
 
 				String volumcomp = "total";
 
-				Integer cj = Integer.valueOf(tds.get(2).text());
+				Integer cj = Integer.valueOf(IsBlank.stringIsBlank(tds.get(2).text()));
 
-				Integer cjchg = Integer.valueOf(tds.get(3).text());
+				Integer cjchg = Integer.valueOf(IsBlank.stringIsBlank(tds.get(3).text()));
 
 				String bcomp = "total";
 
-				Integer buy = Integer.valueOf(tds.get(6).text());
+				Integer buy = Integer.valueOf(IsBlank.stringIsBlank(tds.get(6).text()));
 
-				Integer buychg = Integer.valueOf(tds.get(7).text());
+				Integer buychg = Integer.valueOf(IsBlank.stringIsBlank(tds.get(7).text()));
 
 				String scomp = "total";
 
-				Integer sell = Integer.valueOf(tds.get(10).text());
+				Integer sell = Integer.valueOf(IsBlank.stringIsBlank(tds.get(10).text()));
 
-				Integer sellchg = Integer.valueOf(tds.get(11).text());
+				Integer sellchg = Integer.valueOf(IsBlank.stringIsBlank(tds.get(11).text()));
 				String strRank = tds.get(0).text();
 
 				if (!strRank.equals("总计")) {
-					rank = Integer.valueOf(strRank);
+					rank = Integer.valueOf(IsBlank.stringIsBlank(strRank));
 					volumcomp = tds.get(1).text();
 					bcomp = tds.get(5).text();
 					scomp = tds.get(9).text();

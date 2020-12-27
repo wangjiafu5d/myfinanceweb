@@ -20,7 +20,7 @@ import com.chuan.myfinanceweb.bean.DailyData;
 
 public class DailyDataOfDce {
 	public static void main(String[] args) {
-		getData("20200903");
+		getData("2020-11-05");
 	}
 
 	public static List<DailyData> getData(String strDate) {

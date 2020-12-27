@@ -1,11 +1,8 @@
 com\chuan\myfinanceweb\controller\LoginController.class
-com\chuan\myfinanceweb\bean\DailydatasumExample$GeneratedCriteria.class
 com\chuan\myfinanceweb\utils\GetGoodsIdAndName.class
 com\chuan\myfinanceweb\bean\User.class
 com\chuan\myfinanceweb\utils\HoldingsOfDec.class
-com\chuan\myfinanceweb\bean\DailydatasumExample$Criteria.class
 com\chuan\myfinanceweb\service\CookieService.class
-com\chuan\myfinanceweb\bean\DailydatasumExample$Criterion.class
 com\chuan\myfinanceweb\bean\DataOf100ppiExample$Criterion.class
 com\chuan\myfinanceweb\bean\HoldingsExample.class
 com\chuan\myfinanceweb\utils\DailyDataOf100ppi.class
@@ -37,7 +34,6 @@ com\chuan\myfinanceweb\dao\UserMapper.class
 com\chuan\myfinanceweb\controller\RegisterController.class
 com\chuan\myfinanceweb\bean\HoldingsExample$Criteria.class
 com\chuan\myfinanceweb\bean\DailyData.class
-com\chuan\myfinanceweb\bean\DailydatasumExample.class
 com\chuan\myfinanceweb\utils\DailyDataOfShef.class
 com\chuan\myfinanceweb\bean\ManageRcordExample$GeneratedCriteria.class
 com\chuan\myfinanceweb\dao\ManageRcordMapper.class
@@ -59,12 +55,10 @@ com\chuan\myfinanceweb\service\ManageRecordService.class
 com\chuan\myfinanceweb\bean\HoldingsExample$Criterion.class
 com\chuan\myfinanceweb\service\RegisterService.class
 com\chuan\myfinanceweb\test\MVCtest.class
-com\chuan\myfinanceweb\bean\Dailydatasum.class
 com\chuan\myfinanceweb\bean\ManageRcordExample$Criteria.class
 com\chuan\myfinanceweb\bean\UserExample$Criterion.class
 com\chuan\myfinanceweb\bean\UserExample$GeneratedCriteria.class
 com\chuan\myfinanceweb\utils\GetHtml.class
 com\chuan\myfinanceweb\bean\Holdings.class
 com\chuan\myfinanceweb\interceptor\LoginInterceptor.class
-com\chuan\myfinanceweb\dao\DailydatasumMapper.class
 com\chuan\myfinanceweb\bean\DataOf100ppi.class

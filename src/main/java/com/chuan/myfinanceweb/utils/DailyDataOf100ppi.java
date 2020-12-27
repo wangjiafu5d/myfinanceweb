@@ -87,7 +87,7 @@ public class DailyDataOf100ppi {
 					data.setJc2(new BigDecimal(tds.get(10).text()));
 					data.setPercent2(parsePercent(tds.get(11).text()));
 					data.setDate(realDate);
-					System.out.println(data);
+					//System.out.println(data);
 					list.add(data);
 				}
 				
